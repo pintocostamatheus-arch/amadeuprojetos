@@ -2,17 +2,14 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <!-- Meta tag essencial para iPhone e Android -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Amadeu Projetos: Engenharia Elétrica, Laudos Técnicos e Projetos em Campina Grande - PB.">
     <title>Amadeu Projetos | Engenharia </title>
-	<!-- FAVICON -->
-	<link rel="icon" type="image/png" href="fotos/FAVICON.jpg">
-	<!-- Ícone Padrão (Aba do Navegador) -->
-	<link rel="icon" type="image/png" sizes="32x32" href="fotos/favicon.png">
-	<link rel="icon" type="image/png" sizes="192x192" href="fotos/favicon.png">
-
-	<!-- Ícone para iPhone/iPad (Apple Touch Icon) -->
-	<link rel="apple-touch-icon" sizes="180x180" href="fotos/favicon.png">
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="fotos/FAVICON.jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="fotos/FAVICON.jpg">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,26 +33,83 @@
         .border-orange { border-color: #f57c00; }
         .border-navy { border-color: #1a237e; }
         
-        /* CORREÇÃO PARA IPHONE (iOS) */
+        /* Fundo do Topo (Hero) */
         .hero-bg {
-            background-image: url('fotos/capa2.jpg');
+            background-image: url('fotos/capa2.jpg'); /* Certifique-se que essa foto existe */
             background-position: center;
             background-size: cover;
-            background-attachment: scroll; 
+            background-attachment: scroll; /* Padrão para mobile */
         }
         @media (min-width: 768px) {
-            .hero-bg { background-attachment: fixed; }
+            .hero-bg { background-attachment: fixed; } /* Parallax no PC */
         }
 
         .hero-gradient {
             background: linear-gradient(135deg, rgba(26, 35, 126, 0.95) 0%, rgba(26, 35, 126, 0.85) 100%);
         }
 
-        /* Animações */
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        /* --- ANIMAÇÕES DE ENTRADA (NOVAS) --- */
         
-        /* WhatsApp Flutuante */
+        /* 1. Animação do Menu (Deslizar de cima) */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-nav {
+            animation: slideDown 0.8s ease-out forwards;
+        }
+
+        /* 2. Animação dos Textos do Hero (Subir e Aparecer) */
+        @keyframes fadeInUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-hero-element {
+            opacity: 0; /* Começa invisível */
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Atrasos para criar o efeito cascata */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-700 { animation-delay: 0.7s; }
+
+
+        /* --- OUTRAS ANIMAÇÕES --- */
+
+        /* Efeito Scroll Reveal (Rolagem) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efeito nos Itens de Serviço (Deslizar) */
+        .service-list li {
+            transition: transform 0.3s ease, color 0.3s ease;
+            cursor: default;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+        .service-list li:hover {
+            transform: translateX(10px);
+            color: #f57c00; /* Laranja */
+        }
+        .service-list li svg {
+            flex-shrink: 0;
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Botão Flutuante WhatsApp */
         .whatsapp-float {
             position: fixed;
             width: 60px;
@@ -68,27 +122,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
             z-index: 100;
-            transition: all 0.3s;
+            transition: transform 0.3s;
         }
         .whatsapp-float:hover { transform: scale(1.1); background-color: #20ba5a; }
 
-        /* Estilo da Lista de Serviços */
-        .service-list li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 0.75rem;
-            color: #4b5563;
-            font-size: 0.95rem;
-        }
-        .service-list li svg {
-            flex-shrink: 0;
-            margin-right: 0.75rem;
-            margin-top: 0.25rem;
-        }
-
-        /* Ajuste do Modal para Mobile */
+        /* Modal Ajustado */
         #project-modal .bg-white {
             max-height: 90vh;
             overflow-y: auto;
@@ -102,8 +142,8 @@
         <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
 
-    <!-- NAV BAR -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+    <!-- NAV BAR (Com animação de descida 'animate-nav') -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 animate-nav">
         <div class="container mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
             <a href="#" class="flex items-center">
                 <img src="fotos/logo.png" alt="Amadeu Projetos" class="h-12 md:h-16 w-auto object-contain hover:opacity-90 transition">
@@ -113,7 +153,7 @@
                 <a href="#sobre" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">A Empresa</a>
                 <a href="#servicos" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Serviços</a>
                 <a href="#portfolio" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Portfólio</a>
-                <a href="https://wa.me/5583999695125" target="_blank" class="px-6 py-2 bg-green-500 text-white font-bold rounded shadow hover:bg-green-600 transition flex items-center gap-2">
+                <a href="https://wa.me/5583999695125" target="_blank" class="px-6 py-2 bg-green-500 text-white font-bold rounded shadow hover:bg-green-600 transition flex items-center gap-2 hover:-translate-y-1 transform duration-200">
                     <i data-lucide="phone" class="w-4 h-4"></i> WhatsApp
                 </a>
             </div>
@@ -130,40 +170,48 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION (Com animação em cascata nos textos) -->
     <section id="home" class="relative h-screen min-h-[600px] flex items-center pt-20 hero-bg">
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="container mx-auto px-6 relative z-10 flex flex-col justify-center h-full pb-10">
-            <div class="max-w-4xl text-white fade-in">
-                <div class="inline-flex items-center gap-2 px-4 py-1 mb-6 border border-orange bg-navy/60 text-orange text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-sm">
+            <div class="max-w-4xl text-white">
+                
+                <!-- 1. Badge (Entra primeiro) -->
+                <div class="inline-flex items-center gap-2 px-4 py-1 mb-6 border border-orange bg-navy/60 text-orange text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-sm animate-hero-element delay-100">
                     <span class="w-2 h-2 bg-orange rounded-full animate-pulse"></span> Desde 1996
                 </div>
-                <h1 class="text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 font-heading">
+                
+                <!-- 2. Título (Entra segundo) -->
+                <h1 class="text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 font-heading animate-hero-element delay-300">
                     Engenharia com <br>Segurança e Inovação.
                 </h1>
-                <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl font-light leading-relaxed">
+                
+                <!-- 3. Texto (Entra terceiro) -->
+                <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl font-light leading-relaxed animate-hero-element delay-500">
                     Projetos Elétricos e consultorias técnicas que garantem eficiência, conformidade e desempenho em cada obra.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="https://wa.me/5583999695125" class="px-8 py-4 bg-orange text-white font-bold rounded hover:bg-orange/90 transition shadow-lg shadow-orange/30 text-center block w-full sm:w-auto">
-                        Solicitar Orçamento
+                
+                <!-- 4. Botões (Entram por último) -->
+                <div class="flex flex-col sm:flex-row gap-4 animate-hero-element delay-700">
+                    <a href="https://wa.me/5583999695125" class="px-8 py-4 bg-orange text-white font-bold rounded hover:bg-orange/90 transition shadow-lg shadow-orange/30 text-center block w-full sm:w-auto flex items-center justify-center gap-2 group">
+                        <i data-lucide="message-circle" class="w-5 h-5 animate-bounce"></i> Solicitar Orçamento
                     </a>
                     <a href="#portfolio" class="px-8 py-4 bg-transparent border border-white text-white font-bold rounded hover:bg-white hover:text-navy transition text-center block w-full sm:w-auto">
                         Conhecer Obras
                     </a>
                 </div>
+
             </div>
         </div>
     </section>
 
-<!-- SOBRE A EMPRESA (TEXTO NOVO + IMAGEM PARADA) -->
-    <section id="sobre" class="pt-16 md:pt-20 pb-28 bg-gray-50 relative z-20">
+    <!-- SOBRE A EMPRESA -->
+    <section id="sobre" class="pt-16 md:pt-20 pb-28 bg-gray-50 relative z-20 reveal">
         <div class="container mx-auto px-6">
             
-            <!-- Alinhamento pelo topo (items-start) para a imagem não centralizar no texto longo -->
-            <div class="flex flex-col lg:flex-row gap-16 items-center mb-16">
+            <!-- Alinhamento items-start para texto longo -->
+            <div class="flex flex-col lg:flex-row gap-16 items-start mb-16">
                 
-                <!-- LADO DO TEXTO -->
                 <div class="lg:w-1/2">
                     <span class="text-orange font-bold uppercase tracking-wider text-xs">Sobre Nós</span>
                     <h2 class="text-3xl font-extrabold text-navy mt-2 mb-6 font-heading">Nossa História & Tradição</h2>
@@ -173,7 +221,7 @@
                             Fundada em 10 de setembro de 1996, em Campina Grande – PB, a <strong>Amadeu Projetos e Construções Ltda</strong> consolidou-se como uma empresa de referência no setor da engenharia, unindo tradição, inovação e excelência técnica. Idealizada pelo Engenheiro Eletricista <strong>Ricardo Amadeu Aranha Costa</strong>, a empresa nasceu com o propósito de oferecer soluções eficientes, seguras e totalmente alinhadas às normas técnicas vigentes.
                         </p>
                         <p>
-                            Ao longo de quase três décadas de atuação, construímos uma trajetória marcada por profissionalismo, responsabilidade e compromisso com a qualidade. Atualmente, contamos com uma equipe técnica multidisciplinar, composta por três engenheiros eletricistas, um arquiteto e dois desenhistas especializados.
+                            Ao longo de quase três décadas de atuação, construímos uma trajetória marcada por profissionalismo, responsabilidade e compromisso com a qualidade. Atualmente, contamos com uma equipe técnica multidisciplinar, composta por três engenheiros eletricistas, um arquiteto e dois desenhistas especializados em CAD.
                         </p>
                         <p>
                             Além do nosso corpo técnico interno, dispomos também de uma ampla rede de profissionais parceiros, permitindo atender todas as disciplinas necessárias para o desenvolvimento completo de projetos, independentemente do porte ou complexidade.
@@ -181,12 +229,14 @@
                         <p>
                             Guiamos nossa atuação pelos pilares da segurança, eficiência, responsabilidade técnica e inovação, garantindo que cada entrega seja rigorosamente elaborada, tecnicamente consistente e adaptada às necessidades específicas de cada cliente.
                         </p>
+                        <p>
+                            Ao escolher a Amadeu Projetos, você conta com uma empresa experiente e comprometida em transformar demandas em soluções funcionais e de alto desempenho.
                         </p>
                     </div>
                 </div>
                 
-                <!-- LADO DA FOTO (SEM EFEITO DE MOVIMENTO) -->
-                <div class="lg:w-1/2 w-full">
+                <!-- FOTO FIXA NO TOPO -->
+                <div class="lg:w-1/2 w-full sticky top-24">
                     <img src="fotos/historia.jpg" 
                          class="rounded-xl shadow-lg w-full h-auto object-cover border-4 border-white" 
                          alt="Equipe de Engenharia">
@@ -194,9 +244,8 @@
 
             </div>
 
-            <!-- OS 3 CARDS (CONTINUAM AQUI EMBAIXO) -->
+            <!-- CARDS DE PILARES -->
             <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Card 1 -->
                 <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-orange hover:-translate-y-2 transition duration-300">
                     <div class="w-14 h-14 bg-orange/10 rounded-full flex items-center justify-center mb-6">
                         <i data-lucide="target" class="w-8 h-8 text-orange"></i>
@@ -206,38 +255,32 @@
                         Projetar garantindo a segurança das normas, com inovação e qualidade e principalmente com o custo justo e acessível.
                     </p>
                 </div>
-                <!-- Card 2 -->
                 <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-navy hover:-translate-y-2 transition duration-300">
                     <div class="w-14 h-14 bg-navy/10 rounded-full flex items-center justify-center mb-6">
                         <i data-lucide="shield-check" class="w-8 h-8 text-navy"></i>
                     </div>
                     <h3 class="text-xl font-bold text-navy mb-4 font-heading">Qualidade Garantida</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
-                        A empresa vem atuando de forma efetiva em projetos de instalações elétricas, pareceres técnicos e consultorias, procurando sempre inovar no atendimento aos clientes, com foco voltado para as exigências do mercado, sempre em mudança constante.
+                        A empresa vem atuando de forma efetiva em projetos de instalações elétricas, pareceres técnicos e consultorias, procurando sempre inovar.
                     </p>
                 </div>
-                <!-- Card 3 -->
                 <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-orange hover:-translate-y-2 transition duration-300">
                     <div class="w-14 h-14 bg-orange/10 rounded-full flex items-center justify-center mb-6">
                         <i data-lucide="users" class="w-8 h-8 text-orange"></i>
                     </div>
                     <h3 class="text-xl font-bold text-navy mb-4 font-heading">Atendimento Único</h3>
                     <p class="text-gray-600 leading-relaxed text-sm mb-4">
-                        Cada projeto elaborado passa por uma revisão criteriosa de todos os engenheiros da empresa, para garantir que o melhor resultado chegue até o cliente.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed text-sm font-semibold border-t border-gray-100 pt-2">
-                        A Amadeu Projetos trata cada cliente como único. Cada cliente tem sua necessidade, sonho e desejo.
+                        Cada projeto elaborado passa por uma revisão criteriosa de todos os engenheiros da empresa. A Amadeu Projetos trata cada cliente como único.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAIXA DE AUTORIDADE COM ANIMAÇÃO -->
-    <section class="bg-navy text-white py-12 relative z-20" id="counters">
+    <!-- FAIXA DE AUTORIDADE (CONTADORES) -->
+    <section class="bg-navy text-white py-12 relative z-20 reveal" id="counters">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                
                 <div class="p-2">
                     <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
                         <span class="text-3xl md:text-4xl">+</span>
@@ -245,7 +288,6 @@
                     </div>
                     <span class="text-sm md:text-base text-gray-300 block mt-1">Anos de Mercado</span>
                 </div>
-                
                 <div class="p-2">
                     <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
                         <span class="text-3xl md:text-4xl">+</span>
@@ -253,7 +295,6 @@
                     </div>
                     <span class="text-sm md:text-base text-gray-300 block mt-1">ARTs Emitidas</span>
                 </div>
-                
                 <div class="p-2">
                     <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
                         <span class="text-3xl md:text-4xl">+</span>
@@ -261,7 +302,6 @@
                     </div>
                     <span class="text-sm md:text-base text-gray-300 block mt-1">Clientes Corporativos</span>
                 </div>
-
                 <div class="p-2">
                     <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
                         <span class="text-3xl md:text-4xl counter" data-target="100">0</span>
@@ -269,13 +309,12 @@
                     </div>
                     <span class="text-sm md:text-base text-gray-300 block mt-1">Dentro das Normas</span>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="py-20 bg-white">
+    <!-- SERVIÇOS (Com animação 'reveal' e hover nos itens) -->
+    <section id="servicos" class="py-20 bg-white reveal">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <span class="text-orange font-bold uppercase tracking-wider text-sm">Área de Atuação</span>
@@ -321,8 +360,8 @@
         </div>
     </section>
 
-    <!-- PORTFÓLIO -->
-    <section id="portfolio" class="py-20 bg-white border-t border-gray-100">
+    <!-- PORTFÓLIO (Com animação 'reveal' e filtros com zoom) -->
+    <section id="portfolio" class="py-20 bg-white border-t border-gray-100 reveal">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <span class="text-orange font-bold uppercase tracking-wider text-sm">Nossas Obras</span>
@@ -331,44 +370,15 @@
                 <p class="text-gray-500 max-w-2xl mx-auto">Navegue pelas categorias abaixo para conhecer nossa experiência.</p>
             </div>
 
-            <!-- FILTROS COM EFEITO DE ZOOM -->
+            <!-- FILTROS COM ZOOM -->
             <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
-                
-                <button onclick="filterProjects('all')" 
-                    class="filter-btn active px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
-                    Todos
-                </button>
-                
-                <button onclick="filterProjects('predial')" 
-                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
-                    Predial
-                </button>
-                
-                <button onclick="filterProjects('comercial')" 
-                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
-                    Comercial
-                </button>
-                
-                <button onclick="filterProjects('industrial')" 
-                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
-                    Industrial
-                </button>
-                
-                <button onclick="filterProjects('saude')" 
-                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
-                    Estabelecimentos de Saúde
-                </button>
-                
-                <button onclick="filterProjects('instituicoes')" 
-                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
-                    Instituições
-                </button>
-                
-                <button onclick="filterProjects('geral')" 
-                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
-                    Geral
-                </button>
-
+                <button onclick="filterProjects('all')" class="filter-btn active px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Todos</button>
+                <button onclick="filterProjects('predial')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Predial</button>
+                <button onclick="filterProjects('comercial')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Comercial</button>
+                <button onclick="filterProjects('industrial')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Industrial</button>
+                <button onclick="filterProjects('saude')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Estabelecimentos de Saúde</button>
+                <button onclick="filterProjects('instituicoes')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Instituições</button>
+                <button onclick="filterProjects('geral')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Geral</button>
             </div>
 
             <!-- GRID DE PROJETOS -->
@@ -399,9 +409,9 @@
                 </div>
 
                 <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="comercial"
-                     onclick="openModal('Altas Horas Outlet', 'Santa Cruz do Capibaribe - PE', 'Centro Comercial', ['Subestação Abrigada', 'Projeto de SPDA', 'Rede de Distribuição em Média Tensão', 'Projeto Elétrico de Baixa Tensão'], 'fotos/obras/altas-horas.webp')">
+                     onclick="openModal('Altas Horas Outlet', 'Santa Cruz do Capibaribe - PE', 'Centro Comercial', ['Subestação Abrigada', 'Projeto de SPDA', 'Rede de Distribuição em Média Tensão', 'Projeto Elétrico de Baixa Tensão'], 'fotos/obras/altas-horas.WEBP')">
                     <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/altas-horas.webp" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <img src="fotos/obras/altas-horas.WEBP" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
                     </div>
                     <div class="p-6 bg-white border-b-4 border-orange">
@@ -510,111 +520,73 @@
         </div>
     </section>
 
-<!-- SEÇÃO DE CLIENTES / PARCEIROS -->
-    <section class="py-16 bg-white border-t border-gray-100">
+    <!-- SEÇÃO DE CLIENTES / PARCEIROS (100% NÍTIDAS E COM REVEAL) -->
+    <section class="py-16 bg-white border-t border-gray-100 reveal">
         <div class="container mx-auto px-6">
             <div class="text-center mb-10">
                 <p class="text-gray-500 text-sm font-bold uppercase tracking-widest">Quem confia na Amadeu Projetos</p>
             </div>
 
-            <!-- GRID DE LOGOS -->
-            <!-- No celular: 2 colunas. No PC: 5 colunas. -->
             <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
-                
-                <!-- LOGO 1 -->
                 <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <!-- Substitua pelo arquivo da logo do cliente -->
-                    <img src="fotos/clientes/alpargatas.jpg" alt="Alpargatas" class="h-20 object-contain">
+                    <img src="fotos/clientes/Alpargatas.jpg" alt="Alpargatas" class="h-20 object-contain">
                 </div>
-
-                <!-- LOGO 2 -->
                 <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
                     <img src="fotos/clientes/facisa.png" alt="Unifacisa" class="h-10 object-contain">
                 </div>
-
-                <!-- LOGO 3 -->
                 <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <img src="fotos/clientes/ourovel.jpg" alt="Ourovel" class="h-20 object-contain"> <!-- h-16 se a logo for mais alta -->
+                    <img src="fotos/clientes/Ourovel.jpg" alt="Ourovel" class="h-20 object-contain">
                 </div>
-
-                <!-- LOGO 4 -->
                 <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
                     <img src="fotos/clientes/lmf.png" alt="LMF" class="h-20 object-contain">
                 </div>
-
-                <!-- LOGO 5 -->
                 <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <img src="fotos/clientes/Motiva.png" alt="Motiva" class="h-12 object-contain">
+                    <img src="fotos/clientes/motiva.png" alt="Motiva" class="h-12 object-contain">
                 </div>
-
-               
-                <!-- Se quiser adicionar mais logos, copie o bloco da <div> acima e cole aqui -->
-
             </div>
         </div>
     </section>
 
-    <!-- NOVO MAPA (FULL WIDTH) -->
+    <!-- MAPA (FULL WIDTH) -->
     <section id="mapa" class="w-full h-96 bg-gray-200 relative z-10">
-        <!-- Endereço: Rua Dom Pedro II, 900 - Prata -->
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.989862387488!2d-35.8852397!3d-7.2213494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac1e30393570a3%3A0x500e573732573207!2sRua%20Dom%20Pedro%20II%2C%20900%20-%20Prata%2C%20Campina%20Grande%20-%20PB%2C%2058400-560!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
-<!-- FOOTER (RODAPÉ COMPLETO COM ENDEREÇO) -->
+    <!-- FOOTER (RODAPÉ COMPLETO) -->
     <footer class="bg-navy text-white pt-16 pb-8 border-t-4 border-orange">
         <div class="container mx-auto px-6">
-            
             <div class="grid md:grid-cols-3 gap-12 mb-12">
-                
-                <!-- COLUNA 1: SOBRE -->
+                <!-- COLUNA 1 -->
                 <div class="text-center md:text-left">
                     <h2 class="text-2xl font-bold mb-4 font-heading tracking-wide">AMADEU PROJETOS</h2>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Soluções práticas e inovadoras para a realização do seu projeto. Engenharia com segurança e qualidade desde 1996.
                     </p>
                 </div>
-
-                <!-- COLUNA 2: CONTATOS (AGORA COM ENDEREÇO) -->
+                <!-- COLUNA 2 -->
                 <div class="flex flex-col items-center md:items-start">
                     <h3 class="text-lg font-bold text-orange mb-6 uppercase tracking-wider">Fale Conosco</h3>
-                    
                     <div class="space-y-4">
-                        <!-- Endereço (Novo) -->
                         <a href="https://www.google.com/maps/search/?api=1&query=Rua+Dom+Pedro+II,+900+-+Prata,+Campina+Grande+-+PB" target="_blank" class="flex items-start gap-3 text-gray-300 hover:text-white transition group text-left">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
-                                <i data-lucide="map-pin" class="w-4 h-4"></i>
-                            </div>
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
                             <span class="text-sm leading-tight">Rua Dom Pedro II, 900 - Prata<br>Campina Grande - PB</span>
                         </a>
-
-                        <!-- WhatsApp/Telefone -->
                         <a href="https://wa.me/5583999695125" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
-                                <i data-lucide="phone" class="w-4 h-4"></i>
-                            </div>
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="phone" class="w-4 h-4"></i></div>
                             <span>(83) 9 9969.5125</span>
                         </a>
-
-                        <!-- E-mail -->
                         <a href="mailto:contato@amadeuprojetos.com.br" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
-                                <i data-lucide="mail" class="w-4 h-4"></i>
-                            </div>
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="mail" class="w-4 h-4"></i></div>
                             <span>contato@amadeuprojetos.com.br</span>
                         </a>
-
-                        <!-- Instagram -->
                         <a href="https://instagram.com/amadeuprojetos" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
-                                <i data-lucide="instagram" class="w-4 h-4"></i>
-                            </div>
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="instagram" class="w-4 h-4"></i></div>
                             <span>@amadeuprojetos</span>
                         </a>
                     </div>
                 </div>
-
-                <!-- COLUNA 3: MENU RÁPIDO -->
+                <!-- COLUNA 3 -->
                 <div class="flex flex-col items-center md:items-start">
                     <h3 class="text-lg font-bold text-orange mb-6 uppercase tracking-wider">Menu</h3>
                     <ul class="space-y-3 text-gray-300">
@@ -624,10 +596,7 @@
                         <li><a href="#portfolio" class="hover:text-white hover:translate-x-1 transition inline-block">Portfólio</a></li>
                     </ul>
                 </div>
-
             </div>
-
-            <!-- LINHA FINAL -->
             <div class="border-t border-white/10 pt-8 text-center">
                 <p class="text-xs text-gray-500">
                     &copy; 2025 Amadeu Projetos e Construções Ltda. Todos os direitos reservados.
@@ -636,28 +605,7 @@
         </div>
     </footer>
 
-          
-    <!-- MODAL (POP-UP) -->
-    <div id="project-modal" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="this.parentElement.classList.add('hidden')"></div>
-        <div class="relative z-10 flex items-center justify-center min-h-screen p-4 pointer-events-none">
-            <div class="bg-white w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row pointer-events-auto">
-                <div class="md:w-1/2 h-64 md:h-auto bg-gray-200"><img id="modal-img" src="" class="w-full h-full object-cover"></div>
-                <div class="md:w-1/2 p-8 relative flex flex-col justify-center">
-                    <button onclick="document.getElementById('project-modal').classList.add('hidden')" class="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-orange hover:text-white"><i data-lucide="x"></i></button>
-                    <span class="text-xs font-bold text-orange uppercase tracking-wider mb-2">Detalhes do Projeto</span>
-                    <h3 id="modal-title" class="text-2xl font-bold text-navy mb-2"></h3>
-                    <p id="modal-location" class="text-sm text-gray-500 mb-4 flex items-center gap-2"><i data-lucide="map-pin" class="w-4"></i> <span id="modal-loc-text"></span></p>
-                    <p id="modal-desc" class="text-gray-700 mb-6 text-sm italic border-l-2 border-orange pl-3"></p>
-                    <h4 class="font-bold text-navy text-xs uppercase mb-3">Escopo Realizado:</h4>
-                    <ul id="modal-list" class="text-sm text-gray-600 space-y-2 mb-8"></ul>
-                    <a href="https://wa.me/5583999695125" class="block w-full py-3 bg-green-500 text-white font-bold text-center rounded hover:bg-green-600">Solicitar Orçamento Similar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPTS LÓGICOS -->
+    <!-- SCRIPTS GERAIS E ANIMAÇÕES -->
     <script>
         lucide.createIcons();
         
@@ -694,14 +642,29 @@
             });
         }
 
-        // ANIMAÇÃO DOS NÚMEROS (CONTADOR)
+        // 1. SCRIPT SCROLL REVEAL (APARECER AO ROLAR)
+        function reveal() {
+          var reveals = document.querySelectorAll(".reveal");
+          for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150;
+            if (elementTop < windowHeight - elementVisible) {
+              reveals[i].classList.add("active");
+            }
+          }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Chama uma vez para carregar o topo
+
+        // 2. SCRIPT CONTADOR DE NÚMEROS
         const counters = document.querySelectorAll('.counter');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const counter = entry.target;
                     const target = +counter.getAttribute('data-target');
-                    const speed = 200; // Quanto maior, mais lento
+                    const speed = 200; 
                     const updateCount = () => {
                         const count = +counter.innerText;
                         const inc = target / speed;
@@ -716,17 +679,8 @@
                     observer.unobserve(counter);
                 }
             });
-        }, { threshold: 0.5 }); // Dispara quando 50% do elemento está visível
-
+        }, { threshold: 0.5 });
         counters.forEach(counter => observer.observe(counter));
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
