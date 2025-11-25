@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Amadeu Projetos: Engenharia Elétrica, Laudos Técnicos e Projetos em Campina Grande - PB.">
+    <title>Amadeu Projetos | Engenharia </title>
+	<!-- FAVICON -->
+	<link rel="icon" type="image/png" href="fotos/favicon.jpg">
+	<!-- Ícone Padrão (Aba do Navegador) -->
+	<link rel="icon" type="image/png" sizes="32x32" href="fotos/favicon.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="fotos/favicon.png">
+
+	<!-- Ícone para iPhone/iPad (Apple Touch Icon) -->
+	<link rel="apple-touch-icon" sizes="180x180" href="fotos/favicon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Estilos Globais */
+        body { font-family: 'Open Sans', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        .font-heading { font-family: 'Montserrat', sans-serif; }
+        
+        /* Cores da Marca */
+        .bg-navy { background-color: #1a237e; }
+        .text-navy { color: #1a237e; }
+        .bg-orange { background-color: #f57c00; }
+        .text-orange { color: #f57c00; }
+        .border-orange { border-color: #f57c00; }
+        .border-navy { border-color: #1a237e; }
+        
+        /* CORREÇÃO PARA IPHONE (iOS) */
+        .hero-bg {
+            background-image: url('fotos/capa2.jpg');
+            background-position: center;
+            background-size: cover;
+            background-attachment: scroll; 
+        }
+        @media (min-width: 768px) {
+            .hero-bg { background-attachment: fixed; }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.95) 0%, rgba(26, 35, 126, 0.85) 100%);
+        }
+
+        /* Animações */
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        
+        /* WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 20px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); background-color: #20ba5a; }
+
+        /* Estilo da Lista de Serviços */
+        .service-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+        .service-list li svg {
+            flex-shrink: 0;
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Ajuste do Modal para Mobile */
+        #project-modal .bg-white {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- WHATSAPP FLUTUANTE -->
+    <a href="https://wa.me/5583999695125?text=Olá, visitei o site e gostaria de um orçamento." class="whatsapp-float" target="_blank" title="Falar no WhatsApp">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- NAV BAR -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="fotos/logo.png" alt="Amadeu Projetos" class="h-12 md:h-16 w-auto object-contain hover:opacity-90 transition">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Início</a>
+                <a href="#sobre" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">A Empresa</a>
+                <a href="#servicos" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Serviços</a>
+                <a href="#portfolio" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Portfólio</a>
+                <a href="https://wa.me/5583999695125" target="_blank" class="px-6 py-2 bg-green-500 text-white font-bold rounded shadow hover:bg-green-600 transition flex items-center gap-2">
+                    <i data-lucide="phone" class="w-4 h-4"></i> WhatsApp
+                </a>
+            </div>
+            <button class="md:hidden text-navy p-2 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 p-4 shadow-xl absolute w-full left-0 z-50">
+            <a href="#home" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">Início</a>
+            <a href="#sobre" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">A Empresa</a>
+            <a href="#servicos" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">Serviços</a>
+            <a href="#portfolio" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">Portfólio</a>
+            <a href="https://wa.me/5583999695125" class="block py-3 text-green-600 font-bold bg-green-50 rounded mt-2 text-center">Falar no WhatsApp</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative h-screen min-h-[600px] flex items-center pt-20 hero-bg">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="container mx-auto px-6 relative z-10 flex flex-col justify-center h-full pb-10">
+            <div class="max-w-4xl text-white fade-in">
+                <div class="inline-flex items-center gap-2 px-4 py-1 mb-6 border border-orange bg-navy/60 text-orange text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-sm">
+                    <span class="w-2 h-2 bg-orange rounded-full animate-pulse"></span> Desde 1996
+                </div>
+                <h1 class="text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 font-heading">
+                    Engenharia com <br>Segurança e Inovação.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl font-light leading-relaxed">
+                    Projetos Elétricos e consultorias técnicas que garantem eficiência, conformidade e desempenho em cada obra.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://wa.me/5583999695125" class="px-8 py-4 bg-orange text-white font-bold rounded hover:bg-orange/90 transition shadow-lg shadow-orange/30 text-center block w-full sm:w-auto">
+                        Solicitar Orçamento
+                    </a>
+                    <a href="#portfolio" class="px-8 py-4 bg-transparent border border-white text-white font-bold rounded hover:bg-white hover:text-navy transition text-center block w-full sm:w-auto">
+                        Conhecer Obras
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- SOBRE A EMPRESA (TEXTO NOVO + IMAGEM PARADA) -->
+    <section id="sobre" class="pt-16 md:pt-20 pb-28 bg-gray-50 relative z-20">
+        <div class="container mx-auto px-6">
+            
+            <!-- Alinhamento pelo topo (items-start) para a imagem não centralizar no texto longo -->
+            <div class="flex flex-col lg:flex-row gap-16 items-center mb-16">
+                
+                <!-- LADO DO TEXTO -->
+                <div class="lg:w-1/2">
+                    <span class="text-orange font-bold uppercase tracking-wider text-xs">Sobre Nós</span>
+                    <h2 class="text-3xl font-extrabold text-navy mt-2 mb-6 font-heading">Nossa História & Tradição</h2>
+                    
+                    <div class="space-y-4 text-gray-700 leading-relaxed text-justify text-sm md:text-base">
+                        <p>
+                            Fundada em 10 de setembro de 1996, em Campina Grande – PB, a <strong>Amadeu Projetos e Construções Ltda</strong> consolidou-se como uma empresa de referência no setor da engenharia, unindo tradição, inovação e excelência técnica. Idealizada pelo Engenheiro Eletricista <strong>Ricardo Amadeu Aranha Costa</strong>, a empresa nasceu com o propósito de oferecer soluções eficientes, seguras e totalmente alinhadas às normas técnicas vigentes.
+                        </p>
+                        <p>
+                            Ao longo de quase três décadas de atuação, construímos uma trajetória marcada por profissionalismo, responsabilidade e compromisso com a qualidade. Atualmente, contamos com uma equipe técnica multidisciplinar, composta por três engenheiros eletricistas, um arquiteto e dois desenhistas especializados em CAD.
+                        </p>
+                        <p>
+                            Além do nosso corpo técnico interno, dispomos também de uma ampla rede de profissionais parceiros, permitindo atender todas as disciplinas necessárias para o desenvolvimento completo de projetos, independentemente do porte ou complexidade.
+                        </p>
+                        <p>
+                            Guiamos nossa atuação pelos pilares da segurança, eficiência, responsabilidade técnica e inovação, garantindo que cada entrega seja rigorosamente elaborada, tecnicamente consistente e adaptada às necessidades específicas de cada cliente.
+                        </p>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- LADO DA FOTO (SEM EFEITO DE MOVIMENTO) -->
+                <div class="lg:w-1/2 w-full">
+                    <img src="fotos/historia.jpg" 
+                         class="rounded-xl shadow-lg w-full h-auto object-cover border-4 border-white" 
+                         alt="Equipe de Engenharia">
+                </div>
+
+            </div>
+
+            <!-- OS 3 CARDS (CONTINUAM AQUI EMBAIXO) -->
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-orange hover:-translate-y-2 transition duration-300">
+                    <div class="w-14 h-14 bg-orange/10 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="target" class="w-8 h-8 text-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-4 font-heading">Nosso Objetivo</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        Projetar garantindo a segurança das normas, com inovação e qualidade e principalmente com o custo justo e acessível.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-navy hover:-translate-y-2 transition duration-300">
+                    <div class="w-14 h-14 bg-navy/10 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-navy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-4 font-heading">Qualidade Garantida</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        A empresa vem atuando de forma efetiva em projetos de instalações elétricas, pareceres técnicos e consultorias, procurando sempre inovar no atendimento aos clientes, com foco voltado para as exigências do mercado, sempre em mudança constante.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-orange hover:-translate-y-2 transition duration-300">
+                    <div class="w-14 h-14 bg-orange/10 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-8 h-8 text-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-4 font-heading">Atendimento Único</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm mb-4">
+                        Cada projeto elaborado passa por uma revisão criteriosa de todos os engenheiros da empresa, para garantir que o melhor resultado chegue até o cliente.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm font-semibold border-t border-gray-100 pt-2">
+                        A Amadeu Projetos trata cada cliente como único. Cada cliente tem sua necessidade, sonho e desejo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAIXA DE AUTORIDADE COM ANIMAÇÃO -->
+    <section class="bg-navy text-white py-12 relative z-20" id="counters">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                
+                <div class="p-2">
+                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
+                        <span class="text-3xl md:text-4xl">+</span>
+                        <span class="text-3xl md:text-4xl counter" data-target="29">0</span>
+                    </div>
+                    <span class="text-sm md:text-base text-gray-300 block mt-1">Anos de Mercado</span>
+                </div>
+                
+                <div class="p-2">
+                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
+                        <span class="text-3xl md:text-4xl">+</span>
+                        <span class="text-3xl md:text-4xl counter" data-target="1876">0</span>
+                    </div>
+                    <span class="text-sm md:text-base text-gray-300 block mt-1">ARTs Emitidas</span>
+                </div>
+                
+                <div class="p-2">
+                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
+                        <span class="text-3xl md:text-4xl">+</span>
+                        <span class="text-3xl md:text-4xl counter" data-target="100">0</span>
+                    </div>
+                    <span class="text-sm md:text-base text-gray-300 block mt-1">Clientes Corporativos</span>
+                </div>
+
+                <div class="p-2">
+                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold">
+                        <span class="text-3xl md:text-4xl counter" data-target="100">0</span>
+                        <span class="text-3xl md:text-4xl">%</span>
+                    </div>
+                    <span class="text-sm md:text-base text-gray-300 block mt-1">Dentro das Normas</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-orange font-bold uppercase tracking-wider text-sm">Área de Atuação</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-navy mt-2 font-heading">Nossos Serviços</h2>
+                <div class="w-20 h-1.5 bg-orange mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-10">
+                <div class="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border-l-8 border-orange hover:shadow-xl transition duration-300">
+                    <div class="bg-white p-8 pb-4 flex items-center gap-4 border-b border-gray-100">
+                        <div class="bg-orange p-3 rounded-lg text-white"><i data-lucide="zap" class="w-8 h-8"></i></div>
+                        <h3 class="text-xl md:text-2xl font-bold text-navy font-heading">Projetos Elétricos</h3>
+                    </div>
+                    <div class="p-8 pt-6">
+                        <ul class="service-list text-sm md:text-base">
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> SUBESTAÇÕES AÉREAS E ABRIGADAS</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> INSTALAÇÕES ELÉTRICAS RESIDENCIAIS, PREDIAIS E INDUSTRIAIS</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> SISTEMAS DE ATERRAMENTO</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> PROJETO DE ILUMINAÇÃO PÚBLICA</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> LOTEAMENTOS</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> PROJETOS DE SPDA E GERENCIAMENTO DE RISCO</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> REDE DE DISTRIBUIÇÃO EM BAIXA E MÉDIA TENSÃO</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> SISTEMAS FOTOVOLTAICOS</li>
+                            <li><i data-lucide="check-circle-2" class="text-orange"></i> CANTEIRO DE OBRAS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border-l-8 border-navy hover:shadow-xl transition duration-300">
+                    <div class="bg-white p-8 pb-4 flex items-center gap-4 border-b border-gray-100">
+                        <div class="bg-navy p-3 rounded-lg text-white"><i data-lucide="clipboard-check" class="w-8 h-8"></i></div>
+                        <h3 class="text-xl md:text-2xl font-bold text-navy font-heading">Laudos Técnicos</h3>
+                    </div>
+                    <div class="p-8 pt-6">
+                        <ul class="service-list text-sm md:text-base">
+                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>RESISTÊNCIA DE ATERRAMENTO (NBR 15749)</span></li>
+                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>SPDA (NBR 5419)</span></li>
+                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>PRONTUÁRIO DAS INSTALAÇÕES ELÉTRICAS (NR 10)</span></li>
+                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>LAUDOS DE INSTALAÇÕES DE BAIXA TENSÃO (NBR 5410)</span></li>
+                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>ILUMINAÇÃO DE INTERIORES (ISO/CIE 8995-1)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFÓLIO -->
+    <section id="portfolio" class="py-20 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-orange font-bold uppercase tracking-wider text-sm">Nossas Obras</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-navy mt-2 font-heading">Portfólio em Destaque</h2>
+                <div class="w-24 h-1 bg-orange mx-auto my-6"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">Navegue pelas categorias abaixo para conhecer nossa experiência.</p>
+            </div>
+
+            <!-- FILTROS COM EFEITO DE ZOOM -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
+                
+                <button onclick="filterProjects('all')" 
+                    class="filter-btn active px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
+                    Todos
+                </button>
+                
+                <button onclick="filterProjects('predial')" 
+                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
+                    Predial
+                </button>
+                
+                <button onclick="filterProjects('comercial')" 
+                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
+                    Comercial
+                </button>
+                
+                <button onclick="filterProjects('industrial')" 
+                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
+                    Industrial
+                </button>
+                
+                <button onclick="filterProjects('saude')" 
+                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
+                    Estabelecimentos de Saúde
+                </button>
+                
+                <button onclick="filterProjects('instituicoes')" 
+                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
+                    Instituições
+                </button>
+                
+                <button onclick="filterProjects('geral')" 
+                    class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-gray">
+                    Geral
+                </button>
+
+            </div>
+
+            <!-- GRID DE PROJETOS -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="predial comercial" 
+                     onclick="openModal('Heron Marinho', 'Campina Grande - PB', 'Complexo Residencial e Comercial', ['Subestações Abrigadas (13.8kV)', 'Geração de Emergência', 'Projeto de SPDA', 'Medição em Média Tensão'], 'fotos/obras/heron.jpg')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/heron.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-orange">
+                        <h3 class="font-bold text-navy text-lg">Heron Marinho</h3>
+                        <p class="text-sm text-gray-500 mt-1">Predial / Comercial</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="industrial"
+                     onclick="openModal('CD Alpargatas', 'Campina Grande - PB', 'Centro de Distribuição', ['Subestação Abrigada', 'Parametrização de Relé', 'SPDA', 'Projeto Elétrico de Baixa Tensão'], 'fotos/obras/alpargatas.jpg')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/alpargatas.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-navy">
+                        <h3 class="font-bold text-navy text-lg">Alpargatas Mixing Center</h3>
+                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="comercial"
+                     onclick="openModal('Altas Horas Outlet', 'Santa Cruz do Capibaribe - PE', 'Centro Comercial', ['Subestação Abrigada', 'Projeto de SPDA', 'Rede de Distribuição em Média Tensão', 'Projeto Elétrico de Baixa Tensão'], 'fotos/obras/altas-horas.WEBP')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/altas-horas.WEBP" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-orange">
+                        <h3 class="font-bold text-navy text-lg">Altas Horas Outlet</h3>
+                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="saude"
+                     onclick="openModal('Clínica Dr. Wanderley', 'Guarabira - PB', 'Clínica de Diagnósticos', ['Projeto Elétrico de Baixa Tensão', 'Subestação Aérea', 'Projeto de SPDA'], 'fotos/obras/wanderley.jpg')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/wanderley.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-navy">
+                        <h3 class="font-bold text-navy text-lg">Clínica Dr. Wanderley</h3>
+                        <p class="text-sm text-gray-500 mt-1">Estabelecimento de Saúde</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="predial"
+                     onclick="openModal('Mandriani Home & Business', 'Campina Grande - PB', 'Edifício Residencial', ['Projeto Elétrico Baixa Tensão', 'Cabeamento Estruturado', 'Subestação Abrigada'], 'fotos/obras/mandriani.png')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/mandriani.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-orange">
+                        <h3 class="font-bold text-navy text-lg">Mandriani Home</h3>
+                        <p class="text-sm text-gray-500 mt-1">Predial</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="industrial"
+                     onclick="openModal('Gerdau Aço Norte', 'Recife - PE', 'Siderúrgica', ['Elaboração de estudos para o Sistema de Proteção Contra Descargas Atmosféricas (SPDA) de toda planta da Industria'], 'fotos/obras/gerdau.png')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/gerdau.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-navy">
+                        <h3 class="font-bold text-navy text-lg">Gerdau Aço Norte</h3>
+                        <p class="text-sm text-gray-500 mt-1">Industrial</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="instituicoes"
+                     onclick="openModal('Central de Aulas UEPB', 'Campina Grande - PB', 'Universidade', ['Projeto Elétrico de Baixa Tensão', 'Projeto Entrada de Energia', 'Subestação Aérea', 'SPDA'], 'fotos/obras/uepb.jpg')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/uepb.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-orange">
+                        <h3 class="font-bold text-navy text-lg">Central de Aulas UEPB</h3>
+                        <p class="text-sm text-gray-500 mt-1">Instituições</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="instituicoes"
+                     onclick="openModal('CTERSA - INSA', 'Campina Grande - PB', 'Instituto de Pesquisa', ['Projeto de Arquitetura', 'Projetos Complementares de Engenharia', 'Orçamento de Obra'], 'fotos/obras/insa-1.jpg')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/insa-2.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-navy">
+                        <h3 class="font-bold text-navy text-lg">CTERSA - INSA</h3>
+                        <p class="text-sm text-gray-500 mt-1">Instituições</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="comercial"
+                     onclick="openModal('Rede Compras Loja II', 'Campina Grande - PB', 'Supermercado', ['Projeto Elétrico de Baixa Tensão da Reforma'], 'fotos/obras/redecompras.png')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/redecompras.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-orange">
+                        <h3 class="font-bold text-navy text-lg">Rede Compras</h3>
+                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="industrial"
+                     onclick="openModal('Vão Livre - Estruturas', 'Queimadas - PB', 'Indústria Metalúrgica', ['Projeto Elétrico Baixa Tensão', 'Subestação 1000KVA', 'SPDA'], 'fotos/obras/vao-livre.png')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/vao-livre.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-navy">
+                        <h3 class="font-bold text-navy text-lg">Vão Livre</h3>
+                        <p class="text-sm text-gray-500 mt-1">Industrial</p>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="comercial"
+                     onclick="openModal('Bomquesó - Liberdade', 'Campina Grande - PB', 'Atacado e Varejo', ['Projeto Elétrico Baixa Tensão', 'Entrada de Energia', 'Subestação Aérea'], 'fotos/obras/bomqueso.png')">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="fotos/obras/bomqueso.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
+                    </div>
+                    <div class="p-6 bg-white border-b-4 border-orange">
+                        <h3 class="font-bold text-navy text-lg">Bomquesó</h3>
+                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- SEÇÃO DE CLIENTES / PARCEIROS -->
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10">
+                <p class="text-gray-500 text-sm font-bold uppercase tracking-widest">Quem confia na Amadeu Projetos</p>
+            </div>
+
+            <!-- GRID DE LOGOS -->
+            <!-- No celular: 2 colunas. No PC: 5 colunas. -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-80">
+                
+                <!-- LOGO 1 -->
+                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <!-- Substitua pelo arquivo da logo do cliente -->
+                    <img src="fotos/clientes/Alpargatas.jpg" alt="Alpargatas" class="h-20 object-contain">
+                </div>
+
+                <!-- LOGO 2 -->
+                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <img src="fotos/clientes/facisa.png" alt="Unifacisa" class="h-10 object-contain">
+                </div>
+
+                <!-- LOGO 3 -->
+                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <img src="fotos/clientes/Ourovel.jpg" alt="Ourovel" class="h-20 object-contain"> <!-- h-16 se a logo for mais alta -->
+                </div>
+
+                <!-- LOGO 4 -->
+                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <img src="fotos/clientes/lmf.png" alt="LMF" class="h-12 object-contain">
+                </div>
+
+                <!-- LOGO 5 -->
+                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <img src="fotos/clientes/motiva.png" alt="Motiva" class="h-12 object-contain">
+                </div>
+
+               
+                <!-- Se quiser adicionar mais logos, copie o bloco da <div> acima e cole aqui -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVO MAPA (FULL WIDTH) -->
+    <section id="mapa" class="w-full h-96 bg-gray-200 relative z-10">
+        <!-- Endereço: Rua Dom Pedro II, 900 - Prata -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.989862387488!2d-35.8852397!3d-7.2213494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac1e30393570a3%3A0x500e573732573207!2sRua%20Dom%20Pedro%20II%2C%20900%20-%20Prata%2C%20Campina%20Grande%20-%20PB%2C%2058400-560!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+<!-- FOOTER (RODAPÉ COMPLETO COM ENDEREÇO) -->
+    <footer class="bg-navy text-white pt-16 pb-8 border-t-4 border-orange">
+        <div class="container mx-auto px-6">
+            
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                
+                <!-- COLUNA 1: SOBRE -->
+                <div class="text-center md:text-left">
+                    <h2 class="text-2xl font-bold mb-4 font-heading tracking-wide">AMADEU PROJETOS</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Soluções práticas e inovadoras para a realização do seu projeto. Engenharia com segurança e qualidade desde 1996.
+                    </p>
+                </div>
+
+                <!-- COLUNA 2: CONTATOS (AGORA COM ENDEREÇO) -->
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-lg font-bold text-orange mb-6 uppercase tracking-wider">Fale Conosco</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Endereço (Novo) -->
+                        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Dom+Pedro+II,+900+-+Prata,+Campina+Grande+-+PB" target="_blank" class="flex items-start gap-3 text-gray-300 hover:text-white transition group text-left">
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-sm leading-tight">Rua Dom Pedro II, 900 - Prata<br>Campina Grande - PB</span>
+                        </a>
+
+                        <!-- WhatsApp/Telefone -->
+                        <a href="https://wa.me/5583999695125" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                            </div>
+                            <span>(83) 9 9969.5125</span>
+                        </a>
+
+                        <!-- E-mail -->
+                        <a href="mailto:contato@amadeuprojetos.com.br" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            </div>
+                            <span>contato@amadeuprojetos.com.br</span>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/amadeuprojetos" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
+                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0">
+                                <i data-lucide="instagram" class="w-4 h-4"></i>
+                            </div>
+                            <span>@amadeuprojetos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- COLUNA 3: MENU RÁPIDO -->
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-lg font-bold text-orange mb-6 uppercase tracking-wider">Menu</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><a href="#home" class="hover:text-white hover:translate-x-1 transition inline-block">Início</a></li>
+                        <li><a href="#sobre" class="hover:text-white hover:translate-x-1 transition inline-block">A Empresa</a></li>
+                        <li><a href="#servicos" class="hover:text-white hover:translate-x-1 transition inline-block">Serviços</a></li>
+                        <li><a href="#portfolio" class="hover:text-white hover:translate-x-1 transition inline-block">Portfólio</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- LINHA FINAL -->
+            <div class="border-t border-white/10 pt-8 text-center">
+                <p class="text-xs text-gray-500">
+                    &copy; 2025 Amadeu Projetos e Construções Ltda. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+          
+    <!-- MODAL (POP-UP) -->
+    <div id="project-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="this.parentElement.classList.add('hidden')"></div>
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4 pointer-events-none">
+            <div class="bg-white w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row pointer-events-auto">
+                <div class="md:w-1/2 h-64 md:h-auto bg-gray-200"><img id="modal-img" src="" class="w-full h-full object-cover"></div>
+                <div class="md:w-1/2 p-8 relative flex flex-col justify-center">
+                    <button onclick="document.getElementById('project-modal').classList.add('hidden')" class="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-orange hover:text-white"><i data-lucide="x"></i></button>
+                    <span class="text-xs font-bold text-orange uppercase tracking-wider mb-2">Detalhes do Projeto</span>
+                    <h3 id="modal-title" class="text-2xl font-bold text-navy mb-2"></h3>
+                    <p id="modal-location" class="text-sm text-gray-500 mb-4 flex items-center gap-2"><i data-lucide="map-pin" class="w-4"></i> <span id="modal-loc-text"></span></p>
+                    <p id="modal-desc" class="text-gray-700 mb-6 text-sm italic border-l-2 border-orange pl-3"></p>
+                    <h4 class="font-bold text-navy text-xs uppercase mb-3">Escopo Realizado:</h4>
+                    <ul id="modal-list" class="text-sm text-gray-600 space-y-2 mb-8"></ul>
+                    <a href="https://wa.me/5583999695125" class="block w-full py-3 bg-green-500 text-white font-bold text-center rounded hover:bg-green-600">Solicitar Orçamento Similar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS LÓGICOS -->
+    <script>
+        lucide.createIcons();
+        
+        // Função Modal
+        function openModal(title, location, desc, items, imgSrc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-loc-text').innerText = location;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-img').src = imgSrc;
+            const list = document.getElementById('modal-list');
+            list.innerHTML = '';
+            items.forEach(i => list.innerHTML += `<li class="flex gap-2"><i data-lucide="check-circle" class="w-4 text-orange"></i> ${i}</li>`);
+            lucide.createIcons();
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        // Função Filtros
+        function filterProjects(category) {
+            const projects = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-navy', 'text-white', 'border-navy');
+                btn.classList.add('text-gray-600', 'border-gray-200');
+            });
+            event.target.classList.remove('text-gray-600', 'border-gray-200');
+            event.target.classList.add('bg-navy', 'text-white', 'border-navy');
+            projects.forEach(project => {
+                const categories = project.getAttribute('data-category');
+                if (category === 'all' || categories.includes(category)) {
+                    project.style.display = 'block';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        }
+
+        // ANIMAÇÃO DOS NÚMEROS (CONTADOR)
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const speed = 200; // Quanto maior, mais lento
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 }); // Dispara quando 50% do elemento está visível
+
+        counters.forEach(counter => observer.observe(counter));
+    </script>
+</body>
+</html>
