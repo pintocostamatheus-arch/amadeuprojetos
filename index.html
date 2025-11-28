@@ -227,47 +227,54 @@
     </section>
 
     <!-- SERVIÇOS -->
-    <section id="servicos" class="py-20 bg-white reveal">
+      <!-- SERVIÇOS EM GRID (NOVO LAYOUT) -->
+    <section id="servicos" class="py-20 bg-gray-50 reveal">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <span class="text-orange font-bold uppercase tracking-wider text-sm">Área de Atuação</span>
+            <div class="text-center mb-16">
+                <span class="text-orange font-bold uppercase tracking-wider text-sm">O Que Fazemos</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-navy mt-2 font-heading">Nossos Serviços</h2>
                 <div class="w-20 h-1.5 bg-orange mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Soluções completas divididas em projetos elétricos de alta complexidade e laudos técnicos normativos.</p>
             </div>
-            <div class="grid lg:grid-cols-2 gap-10">
-                <div class="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border-l-8 border-orange hover:shadow-xl transition duration-300">
-                    <div class="bg-white p-8 pb-4 flex items-center gap-4 border-b border-gray-100">
-                        <div class="bg-orange p-3 rounded-lg text-white"><i data-lucide="zap" class="w-8 h-8"></i></div>
-                        <h3 class="text-xl md:text-2xl font-bold text-navy font-heading">Projetos Elétricos</h3>
-                    </div>
-                    <div class="p-8 pt-6">
-                        <ul class="service-list text-sm md:text-base">
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> SUBESTAÇÕES AÉREAS E ABRIGADAS</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> INSTALAÇÕES ELÉTRICAS RESIDENCIAIS, PREDIAIS E INDUSTRIAIS</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> SISTEMAS DE ATERRAMENTO</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> PROJETO DE ILUMINAÇÃO PÚBLICA</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> LOTEAMENTOS</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> PROJETOS DE SPDA E GERENCIAMENTO DE RISCO</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> REDE DE DISTRIBUIÇÃO EM BAIXA E MÉDIA TENSÃO</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> SISTEMAS FOTOVOLTAICOS</li>
-                            <li><i data-lucide="check-circle-2" class="text-orange"></i> CANTEIRO DE OBRAS</li>
-                        </ul>
-                    </div>
+
+            <!-- Projetos Elétricos -->
+            <h3 class="text-2xl font-bold text-navy mb-8 flex items-center gap-3">
+                <div class="p-2 bg-orange rounded-lg text-white"><i data-lucide="zap" class="w-6 h-6"></i></div>
+                Projetos Elétricos
+            </h3>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="check-circle-2" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Subestações</h4><p class="text-sm text-gray-500 mt-1">Aéreas, Abrigadas e Estudo de Coordenação e Seletividade.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="home" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Instalações Elétricas</h4><p class="text-sm text-gray-500 mt-1">Residenciais, Prediais e Industriais.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="activity" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Aterramento</h4><p class="text-sm text-gray-500 mt-1">Sistemas de proteção e segurança.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="lightbulb" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Iluminação Pública</h4><p class="text-sm text-gray-500 mt-1">Eficiência energética urbana.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="map" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Loteamentos</h4><p class="text-sm text-gray-500 mt-1">Infraestrutura elétrica completa.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="shield-alert" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Projetos de SPDA</h4><p class="text-sm text-gray-500 mt-1">E Gerenciamento de Risco.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="network" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Rede de Distribuição</h4><p class="text-sm text-gray-500 mt-1">Em Baixa e Média Tensão.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="sun" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Sistemas Fotovoltaicos</h4><p class="text-sm text-gray-500 mt-1">Energia solar e sustentabilidade.</p></div></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="hammer" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Canteiro de Obras</h4><p class="text-sm text-gray-500 mt-1">Instalações tem´porárias.</p></div></div></div>
+            </div>
+
+            <!-- Laudos Técnicos -->
+            <h3 class="text-2xl font-bold text-navy mb-8 flex items-center gap-3 border-t border-gray-200 pt-8">
+                <div class="p-2 bg-navy rounded-lg text-white"><i data-lucide="clipboard-check" class="w-6 h-6"></i></div>
+                Laudos Técnicos
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
+                    <span class="font-bold text-gray-700">Resistência de Aterramento (NBR 15749)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
                 </div>
-                <div class="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border-l-8 border-navy hover:shadow-xl transition duration-300">
-                    <div class="bg-white p-8 pb-4 flex items-center gap-4 border-b border-gray-100">
-                        <div class="bg-navy p-3 rounded-lg text-white"><i data-lucide="clipboard-check" class="w-8 h-8"></i></div>
-                        <h3 class="text-xl md:text-2xl font-bold text-navy font-heading">Laudos Técnicos</h3>
-                    </div>
-                    <div class="p-8 pt-6">
-                        <ul class="service-list text-sm md:text-base">
-                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>RESISTÊNCIA DE ATERRAMENTO (NBR 15749)</span></li>
-                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>SPDA (NBR 5419)</span></li>
-                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>PRONTUÁRIO DAS INSTALAÇÕES ELÉTRICAS (NR 10)</span></li>
-                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>LAUDOS DE INSTALAÇÕES DE BAIXA TENSÃO (NBR 5410)</span></li>
-                            <li><i data-lucide="check-circle-2" class="text-navy"></i> <span>ILUMINAÇÃO DE INTERIORES (ISO/CIE 8995-1)</span></li>
-                        </ul>
-                    </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
+                    <span class="font-bold text-gray-700">SPDA - Sistema de Proteção Contra Descargas Atmosféricas (NBR 5419)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
+                    <span class="font-bold text-gray-700">Prontuário das Instalações (NR 10)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
+                    <span class="font-bold text-gray-700">Laudos de Baixa Tensão (NBR 5410)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
+                    <span class="font-bold text-gray-700">Iluminação de Interiores (ISO/CIE 8995-1)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
                 </div>
             </div>
         </div>
@@ -456,6 +463,53 @@
             </div>
         </div>
     </section>
+	
+	  <!-- FAIXA DE CHAMADA FINAL (NOVA) -->
+    <section class="py-16 bg-orange relative overflow-hidden reveal">
+        <div class="absolute top-0 left-0 w-full h-full bg-white/10 skew-y-3 origin-bottom-left transform scale-110"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 font-heading">Pronto para iniciar seu projeto?</h2>
+            <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Garanta segurança normativa e eficiência energética com a Amadeu Projetos.</p>
+            <a href="https://wa.me/5583999695125" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-orange font-bold rounded-full hover:bg-navy hover:text-white transition shadow-2xl transform hover:scale-105 duration-200">
+                <i data-lucide="message-circle" class="w-5 h-5"></i> Falar no WhatsApp Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO DE CONTATO (NOVO) -->
+    <section id="contato" class="py-20 bg-navy relative overflow-hidden reveal">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-orange/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Lado Esquerdo -->
+                <div class="lg:w-5/12 text-white">
+                    <span class="text-orange font-bold uppercase tracking-widest text-sm mb-2 block">Fale com a Engenharia</span>
+                    <h2 class="text-4xl font-extrabold font-heading mb-6 leading-tight">Vamos tirar o seu projeto do papel?</h2>
+                    <p class="text-gray-300 text-lg mb-10 leading-relaxed">Solicite uma proposta técnica ou agende uma reunião. Retornamos em até 24h.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4"><div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-orange"><i data-lucide="phone" class="w-6 h-6"></i></div><div><p class="text-xs text-gray-400 uppercase font-bold">Ligue para nós</p><p class="text-xl font-bold">(83) 9 9969.5125 <span class="text-sm font-normal text-gray-400">/</span> 3341-6017</p></div></div>
+                        <div class="flex items-center gap-4"><div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-orange"><i data-lucide="mail" class="w-6 h-6"></i></div><div><p class="text-xs text-gray-400 uppercase font-bold">Envie um e-mail</p><p class="text-lg font-bold">contato@amadeuprojetos.com.br</p></div></div>
+                    </div>
+                </div>
+                <!-- Lado Direito (Formulário) -->
+                <div class="lg:w-7/12">
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-10">
+                        <!-- Substitua o action abaixo pelo seu link do Formspree -->
+                        <form action="https://formspree.io/f/xangdylw" method="POST" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div><label class="block text-sm font-bold text-gray-700 mb-2">Nome</label><input type="text" name="nome" placeholder="Seu nome" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></div>
+                                <div><label class="block text-sm font-bold text-gray-700 mb-2">Telefone</label><input type="tel" name="telefone" placeholder="(83) 99999-9999" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></div>
+                            </div>
+                            <div><label class="block text-sm font-bold text-gray-700 mb-2">E-mail</label><input type="email" name="email" placeholder="seu@email.com" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></div>
+                            <div><label class="block text-sm font-bold text-gray-700 mb-2">Mensagem</label><textarea name="mensagem" rows="3" placeholder="Como podemos ajudar?" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></textarea></div>
+                            <button type="submit" class="w-full py-4 bg-orange text-white font-bold rounded-lg shadow-lg hover:bg-navy transition transform hover:-translate-y-1">ENVIAR MENSAGEM</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- MAPA -->
     <section id="mapa" class="w-full h-96 bg-gray-200 relative z-10">
@@ -484,8 +538,9 @@
                         </a>
                         <a href="https://wa.me/5583999695125" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
                             <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="phone" class="w-4 h-4"></i></div>
-                            <span>(83) 9 9969.5125</span>
+                            <span>(83) 9 9969.5125 / 3341-6017</span>
                         </a>
+			</a>
                         <a href="mailto:contato@amadeuprojetos.com.br" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
                             <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="mail" class="w-4 h-4"></i></div>
                             <span>contato@amadeuprojetos.com.br</span>
