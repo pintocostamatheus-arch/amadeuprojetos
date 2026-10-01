@@ -240,14 +240,16 @@
         .hero.off .sld *, .hero.off .hero-photo { animation-play-state: paused !important; }
         .sld .flow.up   { animation-delay: 1.5s, 1.5s; }  /* rede até o disjuntor: já energizada */
         .sld .flow.down { animation-delay: 2.45s, 2.45s; } /* após fechar o geral */
-        .sld .flow.solar { stroke: #39e07a; animation-delay: 3.05s, 3.05s; }
-        .sld .flow.glow.solar { stroke: rgba(57,224,122,.28); }
+        .sld .flow.solar { stroke: var(--green); animation-delay: 3.05s, 3.05s; }
+        .sld .flow.glow.solar { stroke: rgba(37,211,102,.28); }
         @keyframes on { to { opacity: 1; } }
         @keyframes run { to { stroke-dashoffset: -80; } }
 
         /* cargas acendendo */
         .sld .lamp { transition: fill .4s; animation: lampOn .7s ease 2.9s both; }
         @keyframes lampOn { 0% { fill: rgba(14,20,80,.6); } 40% { fill: #ffd08a; } 55% { fill: rgba(245,124,0,.35); } 100% { fill: var(--orange); filter: drop-shadow(0 0 10px rgba(245,124,0,.9)); } }
+        .sld .lamp.gen { animation-name: genOn; }
+        @keyframes genOn { 0% { fill: rgba(14,20,80,.6); } 40% { fill: #b6ffd2; } 55% { fill: rgba(37,211,102,.35); } 100% { fill: var(--green); filter: drop-shadow(0 0 10px rgba(37,211,102,.9)); } }
         .sld .rotor { transform-box: fill-box; transform-origin: center; animation: spin 1.4s linear 2.9s infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .sld .qd-led { fill: #3b4170; animation: led 1.6s steps(1) 2.9s infinite; }
@@ -718,7 +720,7 @@
                     <circle class="qd-led" cx="326" cy="506" r="3"/>
                     <text class="txt" x="310" y="566" text-anchor="middle">QUADRO</text>
                     <!-- inversor fotovoltaico -->
-                    <rect class="sym lamp" x="386" y="498" width="48" height="40" rx="3" style="animation-delay:3.05s"/>
+                    <rect class="sym lamp gen" x="386" y="498" width="48" height="40" rx="3" style="animation-delay:3.05s"/>
                     <path class="w" d="M434 498 L386 538" style="stroke:#fff;stroke-width:1.5"/>
                     <path class="w" d="M393 508 H403 M393 513 H403" style="stroke:#fff;stroke-width:1.8"/>
                     <path class="w" d="M416 528 q3.5 -6 7 0 t7 0" style="stroke:#fff;stroke-width:1.8"/>
