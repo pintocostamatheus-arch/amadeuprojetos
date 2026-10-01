@@ -224,7 +224,7 @@
         /* disjuntor geral fechando */
         .sld .blade {
             transform-box: view-box; transform-origin: 260px 322px; transform: rotate(-38deg);
-            animation: close .45s cubic-bezier(.5,0,.2,1.4) 2.05s both;
+            opacity: 0; animation: fadeIn .6s ease 1.3s both, close .45s cubic-bezier(.5,0,.2,1.4) 2.05s both;
         }
         @keyframes close { to { transform: rotate(0deg); } }
         .sld .spark { opacity: 0; transform-box: fill-box; transform-origin: center; animation: spark .5s ease-out 2.35s both; }
@@ -240,6 +240,8 @@
         .hero.off .sld *, .hero.off .hero-photo { animation-play-state: paused !important; }
         .sld .flow.up   { animation-delay: 1.5s, 1.5s; }  /* rede até o disjuntor: já energizada */
         .sld .flow.down { animation-delay: 2.45s, 2.45s; } /* após fechar o geral */
+        .sld .flow.solar { stroke: #39e07a; animation-delay: 3.05s, 3.05s; }
+        .sld .flow.glow.solar { stroke: rgba(57,224,122,.28); }
         @keyframes on { to { opacity: 1; } }
         @keyframes run { to { stroke-dashoffset: -80; } }
 
@@ -715,25 +717,27 @@
                     <text class="txt-b" x="296" y="523" style="font-size:12px">QD1</text>
                     <circle class="qd-led" cx="326" cy="506" r="3"/>
                     <text class="txt" x="310" y="566" text-anchor="middle">QUADRO</text>
-                    <!-- iluminação pública -->
-                    <circle class="sym lamp" cx="410" cy="518" r="20" style="animation-delay:3.05s"/>
-                    <path class="w" d="M396 504 l28 28 M424 504 l-28 28" style="stroke:#fff"/>
-                    <text class="txt" x="410" y="566" text-anchor="middle">ILUM. PÚBLICA</text>
+                    <!-- inversor fotovoltaico -->
+                    <rect class="sym lamp" x="386" y="498" width="48" height="40" rx="3" style="animation-delay:3.05s"/>
+                    <path class="w" d="M434 498 L386 538" style="stroke:#fff;stroke-width:1.5"/>
+                    <path class="w" d="M393 508 H403 M393 513 H403" style="stroke:#fff;stroke-width:1.8"/>
+                    <path class="w" d="M416 528 q3.5 -6 7 0 t7 0" style="stroke:#fff;stroke-width:1.8"/>
+                    <text class="txt" x="410" y="566" text-anchor="middle">FOTOVOLTAICA</text>
                 </g>
 
                 <!-- corrente -->
+                <path class="flow glow solar" d="M410 498 V424 M410 402 V360 H300"/>
                 <path class="flow glow up" d="M260 18 V92 M260 120 V148 M260 242 V280"/>
                 <path class="flow glow down" d="M260 322 V360 H110 V402"/>
                 <path class="flow glow down" d="M260 360 H210 V402" style="stroke-dashoffset:-20"/>
                 <path class="flow glow down" d="M260 360 H310 V402" style="stroke-dashoffset:-35"/>
-                <path class="flow glow down" d="M260 360 H410 V402" style="stroke-dashoffset:-50"/>
-                <path class="flow glow down" d="M110 424 V492 M210 424 V498 M310 424 V498 M410 424 V498"/>
+                <path class="flow glow down" d="M110 424 V492 M210 424 V498 M310 424 V498"/>
+                <path class="flow solar" d="M410 498 V424 M410 402 V360 H300"/>
                 <path class="flow up" d="M260 18 V92 M260 120 V148 M260 242 V280"/>
                 <path class="flow down" d="M260 322 V360 H110 V402"/>
                 <path class="flow down" d="M260 360 H210 V402" style="stroke-dashoffset:-20"/>
                 <path class="flow down" d="M260 360 H310 V402" style="stroke-dashoffset:-35"/>
-                <path class="flow down" d="M260 360 H410 V402" style="stroke-dashoffset:-50"/>
-                <path class="flow down" d="M110 424 V492 M210 424 V498 M310 424 V498 M410 424 V498"/>
+                <path class="flow down" d="M110 424 V492 M210 424 V498 M310 424 V498"/>
             </svg>
         </div>
         <a href="#sobre" class="scroll-hint" aria-label="Rolar para a empresa"></a>
