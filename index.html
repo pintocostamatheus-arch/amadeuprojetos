@@ -2,683 +2,1193 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Amadeu Projetos: Engenharia Elétrica, Laudos Técnicos e Projetos em Campina Grande - PB.">
-    <title>Amadeu Projetos | Engenharia </title>
-    
-    <!-- FAVICON -->
-    <link rel="icon" type="image/jpg" href="fotos/FAVICON.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="fotos/FAVICON.png">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fontes Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Ícones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Amadeu Projetos: Engenharia Elétrica, Laudos Técnicos e Projetos em Campina Grande - PB. 30 anos de mercado.">
+    <meta name="theme-color" content="#141c66">
+    <title>Amadeu Projetos | Engenharia</title>
+
+    <meta property="og:title" content="Amadeu Projetos | Engenharia">
+    <meta property="og:description" content="Projetos elétricos e laudos técnicos em Campina Grande - PB, desde 1996.">
+    <meta property="og:image" content="fotos/logo.png">
+
+    <link rel="icon" href="fotos/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="fotos/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fotos/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="fotos/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
-        /* Estilos Globais */
-        body { font-family: 'Open Sans', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
-        .font-heading { font-family: 'Montserrat', sans-serif; }
-        
-        /* Cores da Marca */
-        .bg-navy { background-color: #1a237e; }
-        .text-navy { color: #1a237e; }
-        .bg-orange { background-color: #f57c00; }
-        .text-orange { color: #f57c00; }
-        .border-orange { border-color: #f57c00; }
-        .border-navy { border-color: #1a237e; }
-        
-        /* Fundo do Topo (Hero) */
-        .hero-bg {
-            background-image: url('fotos/capa2.jpg');
-            background-position: center;
-            background-size: cover;
-            background-attachment: scroll;
-        }
-        @media (min-width: 768px) {
-            .hero-bg { background-attachment: fixed; }
+        /* =========================================================
+           TOKENS
+           ========================================================= */
+        :root {
+            --navy: #1a237e;          /* azul da marca */
+            --navy-deep: #141c66;
+            --navy-ink: #0e1450;
+            --orange: #f57c00;        /* laranja da marca */
+            --orange-soft: #ffb35c;
+            --paper: #f5f6fa;
+            --white: #ffffff;
+            --ink: #1d2140;
+            --muted: #5b6080;
+            --line: #e1e4ef;
+            --line-dark: rgba(255,255,255,.12);
+            --green: #25d366;
+
+            --f-display: 'Montserrat', system-ui, sans-serif;
+            --f-body: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            --wrap: 1536px;
+            --gutter: clamp(20px, 3.5vw, 56px);
+            --ease: cubic-bezier(.2,.8,.2,1);
+            --ease-out: cubic-bezier(.16,1,.3,1);
         }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(26, 35, 126, 0.95) 0%, rgba(26, 35, 126, 0.85) 100%);
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body {
+            margin: 0; font-family: var(--f-body); color: var(--ink); background: var(--paper);
+            font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;
         }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+        h1, h2, h3, h4 { font-family: var(--f-display); margin: 0; line-height: 1.08; letter-spacing: -0.01em; }
+        p { margin: 0; }
+        button { font: inherit; cursor: pointer; }
+        :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
+        .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+        .icon { width: 20px; height: 20px; stroke-width: 1.8; }
 
-        /* --- ANIMAÇÕES DE ENTRADA (CABEÇALHO) --- */
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        /* Rótulo de seção: pequeno, em caixa normal, com um traço de condutor */
+        .kicker {
+            display: flex; width: fit-content; align-items: center; gap: 10px;
+            font-size: .8rem; line-height: 1; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 16px;
         }
-        .animate-nav {
-            animation: slideDown 0.8s ease-out forwards;
+        .kicker::before { content: ""; width: 28px; height: 2px; background: currentColor; border-radius: 2px; }
+        .section-title {
+            font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 800; color: var(--navy);  letter-spacing: -0.02em;
         }
+        .section-lead { color: var(--muted); max-width: 60ch; margin-top: 14px; font-size: 1.05rem; }
 
-        @keyframes fadeInUp {
-            from { transform: translateY(40px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        /* =========================================================
+           BOTÕES
+           ========================================================= */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 15px 26px; border-radius: 10px; font-weight: 600; font-size: 1rem;
+            border: 1.5px solid transparent; transition: transform .25s var(--ease), background-color .25s, color .25s, box-shadow .25s, border-color .25s;
+            will-change: transform;
         }
-        .animate-hero-element {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
+        .btn-primary { background: var(--orange); color: #fff; box-shadow: 0 10px 30px -10px rgba(245,124,0,.7); }
+        .btn-primary:hover { background: #ff8a14; box-shadow: 0 14px 34px -10px rgba(245,124,0,.85); }
+        .btn-ghost { border-color: rgba(255,255,255,.45); color: #fff; }
+        .btn-ghost:hover { background: #fff; color: var(--navy); border-color: #fff; }
+        .btn-whats { background: var(--green); color: #fff; }
+        .btn-whats:hover { background: #1fbe5b; }
+
+        /* =========================================================
+           NAV + linha de progresso (condutor energizado)
+           ========================================================= */
+        .nav {
+            position: fixed; inset: 0 0 auto 0; z-index: 50; height: 84px;
+            background: #fff;
+            border-bottom: 1px solid transparent; transition: height .35s var(--ease), border-color .35s, box-shadow .35s;
+            animation: navIn .9s var(--ease-out) both;
         }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-700 { animation-delay: 0.7s; }
+        .nav.scrolled { height: 68px; border-color: var(--line); box-shadow: 0 8px 30px -18px rgba(20,28,102,.35); }
+        @keyframes navIn { from { transform: translateY(-100%); } to { transform: none; } }
+        .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo img { height: 54px; width: auto; transition: height .35s var(--ease); }
+        .nav.scrolled .nav-logo img { height: 44px; }
+        .nav-links { display: flex; align-items: center; gap: 34px; }
+        .nav-links a.link {
+            position: relative; font-weight: 600; font-size: .95rem; color: var(--navy); padding: 6px 0;
+        }
+        .nav-links a.link::after {
+            content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--orange);
+            transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease);
+        }
+        .nav-links a.link:hover::after, .nav-links a.link.active::after { transform: scaleX(1); }
+        .nav-links .btn { padding: 10px 18px; font-size: .92rem; }
+        .progress {
+            position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%;
+            background: linear-gradient(90deg, var(--orange), var(--orange-soft));
+            transform-origin: left; transform: scaleX(0);
+            box-shadow: 0 0 10px rgba(245,124,0,.8);
+        }
+        @supports (animation-timeline: scroll()) {
+            .progress { animation: grow linear both; animation-timeline: scroll(root); }
+            @keyframes grow { to { transform: scaleX(1); } }
+        }
+        .menu-btn { display: none; background: none; border: 0; color: var(--navy); padding: 8px; }
+        .menu-btn .icon { width: 30px; height: 30px; }
+        .mobile-menu {
+            position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-top: 1px solid var(--line);
+            box-shadow: 0 20px 40px -20px rgba(20,28,102,.4); padding: 8px var(--gutter) 18px;
+            transform-origin: top; transform: scaleY(.96); opacity: 0; visibility: hidden;
+            transition: opacity .25s, transform .3s var(--ease), visibility .25s;
+        }
+        .mobile-menu.open { opacity: 1; transform: none; visibility: visible; }
+        .mobile-menu a { display: block; padding: 14px 0; font-weight: 600; color: var(--navy); border-bottom: 1px solid var(--line); }
+        .mobile-menu a.btn { margin-top: 14px; border: 0; color: #fff; }
 
-        /* --- ANIMAÇÕES DE ROLAGEM (REVEAL) --- */
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* =========================================================
+           HERO — diagrama unifilar vivo
+           ========================================================= */
+        .hero {
+            position: relative; height: 100vh; height: 100svh; min-height: 540px; display: flex; align-items: center;
+            padding: 84px 0 0; color: #fff; overflow: hidden; isolation: isolate;
+            background: var(--navy-ink);
+        }
+        .hero-photo {
+            position: absolute; inset: 0; z-index: -3;
+            background: url('fotos/capa2.jpg') center 40% / cover no-repeat;
+            opacity: .22; filter: grayscale(.4) contrast(1.1);
+            transform: scale(1.08); animation: heroPhoto 2.4s var(--ease-out) both;
+        }
+        @keyframes heroPhoto { from { transform: scale(1.18); opacity: 0; } }
+        .hero::before { /* tinta azul da marca */
+            content: ""; position: absolute; inset: 0; z-index: -2;
+            background:
+                radial-gradient(ellipse 70% 60% at 78% 45%, rgba(26,35,126,.15), transparent 70%),
+                linear-gradient(115deg, rgba(14,20,80,.97) 0%, rgba(20,28,102,.9) 45%, rgba(26,35,126,.78) 100%);
+        }
+        .hero::after { /* malha de prancheta */
+            content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse 90% 80% at 70% 50%, #000 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 90% 80% at 70% 50%, #000 30%, transparent 80%);
+        }
+        .hero > .wrap { width: 100%; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 90px); align-items: stretch; }
+        .hero-grid > div:first-child { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2.5% 0 5%; }
+        .hero-grid .hero-badge, .hero-grid .hero-lead { margin-bottom: 0; }
+        .hero-grid h1 { margin-bottom: clamp(12px, 2.6vh, 24px); }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px;
+            border: 1px solid rgba(245,124,0,.55); border-radius: 100px; background: rgba(245,124,0,.08);
+            font-size: .9rem; font-weight: 600; color: #ffd2a3; margin-bottom: clamp(14px, 3vh, 28px);
+            animation: up .8s var(--ease-out) .15s both;
+        }
+        .hero-badge b {
+            background: var(--orange); color: #fff; border-radius: 100px; padding: 2px 10px;
+            font-family: var(--f-display); font-weight: 800; font-size: .85rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.1rem, min(4.4vw, 8.2vh), 4.6rem); font-weight: 800; 
+            letter-spacing: -0.02em; line-height: 1.05; margin-bottom: clamp(14px, 3vh, 26px);
+        }
+        .hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
+        .hero h1 .word { display: inline-block; transform: translateY(105%); animation: wordUp .9s var(--ease-out) both; }
+        @keyframes wordUp { to { transform: none; } }
+        .hero-lead {
+            font-size: clamp(1rem, min(1.5vw, 2.4vh), 1.25rem); color: #c9cdf0; max-width: 52ch; margin-bottom: clamp(20px, 4vh, 36px);
+            animation: up .8s var(--ease-out) .9s both;
+        }
+        .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; animation: up .8s var(--ease-out) 1.05s both; }
+        @keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
-        /* Efeitos Listas */
-        .service-list li { transition: transform 0.3s ease, color 0.3s ease; cursor: default; display: flex; align-items: flex-start; margin-bottom: 0.75rem; color: #4b5563; font-size: 0.95rem; }
-        .service-list li:hover { transform: translateX(10px); color: #f57c00; }
-        .service-list li svg { flex-shrink: 0; margin-right: 0.75rem; margin-top: 0.25rem; }
-        
-        /* WhatsApp Flutuante */
+        .scroll-hint {
+            position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+            width: 26px; height: 42px; border: 2px solid rgba(255,255,255,.35); border-radius: 20px;
+            animation: up .8s var(--ease-out) 2.6s both;
+        }
+        .scroll-hint::after {
+            content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px;
+            border-radius: 2px; background: var(--orange); animation: wheel 1.8s ease-in-out infinite 3s;
+        }
+        @keyframes wheel { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+
+        /* ---------- O diagrama ---------- */
+        .sld { height: calc(100svh - 84px - 64px); min-height: 440px; max-height: 700px; width: auto; max-width: 100%; margin-left: auto; margin-right: clamp(0px, 3vw, 60px); overflow: visible; display: block; }
+        .sld .w   { fill: none; stroke: rgba(255,255,255,.55); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .sld .bus { stroke-width: 5; stroke: rgba(255,255,255,.75); }
+        .sld .sym { fill: rgba(14,20,80,.6); stroke: rgba(255,255,255,.7); stroke-width: 2; }
+        .sld .txt { fill: #aab1e8; font-family: var(--f-body); font-size: 10.5px; font-weight: 600; letter-spacing: .09em; }
+        .sld .txt.kv { letter-spacing: .02em; font-size: 11px; }
+        .sld .txt-b { fill: #fff; font-family: var(--f-display); font-weight: 700; font-size: 13px; }
+        .sld .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1s var(--ease) both; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        .sld .fade { opacity: 0; animation: fadeIn .6s ease both; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* disjuntor geral fechando */
+        .sld .blade {
+            transform-box: view-box; transform-origin: 260px 322px; transform: rotate(-38deg);
+            animation: close .45s cubic-bezier(.5,0,.2,1.4) 2.05s both;
+        }
+        @keyframes close { to { transform: rotate(0deg); } }
+        .sld .spark { opacity: 0; transform-box: fill-box; transform-origin: center; animation: spark .5s ease-out 2.35s both; }
+        @keyframes spark { 0% { opacity: 0; transform: scale(.2); } 30% { opacity: 1; } 100% { opacity: 0; transform: scale(2.4); } }
+
+        /* corrente percorrendo os condutores */
+        .sld .flow {
+            fill: none; stroke: var(--orange); stroke-width: 3; stroke-linecap: round;
+            stroke-dasharray: 10 70; opacity: 0;
+            animation: on .4s ease both, run 2.2s linear infinite;
+        }
+        .sld .flow.glow { stroke-width: 9; stroke: rgba(245,124,0,.28); }
+        .hero.off .sld *, .hero.off .hero-photo { animation-play-state: paused !important; }
+        .sld .flow.up   { animation-delay: 1.5s, 1.5s; }  /* rede até o disjuntor: já energizada */
+        .sld .flow.down { animation-delay: 2.45s, 2.45s; } /* após fechar o geral */
+        @keyframes on { to { opacity: 1; } }
+        @keyframes run { to { stroke-dashoffset: -80; } }
+
+        /* cargas acendendo */
+        .sld .lamp { transition: fill .4s; animation: lampOn .7s ease 2.9s both; }
+        @keyframes lampOn { 0% { fill: rgba(14,20,80,.6); } 40% { fill: #ffd08a; } 55% { fill: rgba(245,124,0,.35); } 100% { fill: var(--orange); filter: drop-shadow(0 0 10px rgba(245,124,0,.9)); } }
+        .sld .rotor { transform-box: fill-box; transform-origin: center; animation: spin 1.4s linear 2.9s infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .sld .qd-led { fill: #3b4170; animation: led 1.6s steps(1) 2.9s infinite; }
+        @keyframes led { 0%, 60% { fill: #39e07a; } 61%, 100% { fill: #1f9a52; } }
+
+        /* =========================================================
+           SOBRE
+           ========================================================= */
+        .about { padding: clamp(24px, 2.4vw, 34px) 0 clamp(24px, 2.6vw, 38px); background: var(--paper); }
+        .about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(36px, 6vw, 80px); align-items: stretch; }
+        .about-text { color: #40456a; display: grid; gap: 16px; margin-top: 26px; text-align: justify; hyphens: none; -webkit-hyphens: none; }
+        .about-text strong { color: var(--navy); font-weight: 600; }
+        .about-figure { position: relative; min-height: 420px; }
+        .about-figure .frame {
+            border-radius: 18px; overflow: hidden; height: 100%; position: absolute; inset: 0;
+            box-shadow: 0 40px 80px -40px rgba(20,28,102,.55);
+            clip-path: inset(0 0 100% 0 round 18px); transition: clip-path 1s ease-out;
+        }
+        .about-figure.in .frame { clip-path: inset(0 0 0 0 round 18px); }
+        .about-figure .frame img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); transition: transform 1.8s var(--ease-out); }
+        .about-figure.in .frame img { transform: scale(1); }
+
+        /* selo 30 anos */
+        .seal {
+            position: absolute; left: -38px; bottom: -38px; width: 150px; height: 150px; border-radius: 50%;
+            background: var(--orange); color: #fff; display: grid; place-items: center;
+            box-shadow: 0 20px 40px -14px rgba(245,124,0,.75);
+            opacity: 0; transform: scale(.6) rotate(-30deg); transition: opacity .6s .7s, transform .9s cubic-bezier(.3,1.5,.4,1) .7s;
+        }
+        .about-figure.in .seal { opacity: 1; transform: none; }
+        .seal svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 26s linear infinite; }
+        .seal svg.ring text { fill: #fff; font-family: var(--f-body); font-size: 10.5px; font-weight: 600; letter-spacing: 2.6px; }
+        .seal .num { font-family: var(--f-display); font-weight: 900; font-size: 3.1rem; line-height: .8;  text-align: center; }
+        .seal .num small { display: block; font-size: .85rem; font-weight: 700;  margin-top: 4px; letter-spacing: .02em; }
+
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.5vw, 36px); margin-top: clamp(24px, 2.4vw, 34px); }
+        .pillar {
+            position: relative; background: #fff; border-radius: 20px; padding: 38px 34px 34px;
+            border-top: 7px solid var(--orange);
+            box-shadow: 0 24px 50px -24px rgba(20,28,102,.35), 0 2px 6px rgba(20,28,102,.06);
+            transition: transform .45s cubic-bezier(.3,1.6,.5,1), box-shadow .45s var(--ease);
+        }
+        .pillar:nth-child(2) { border-top-color: var(--navy); }
+        .pillar:hover { transform: translateY(-12px); box-shadow: 0 40px 70px -30px rgba(20,28,102,.5), 0 2px 6px rgba(20,28,102,.06); }
+        .pillar .p-icon {
+            width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 24px;
+            background: rgba(245,124,0,.12); color: var(--orange); transition: transform .45s cubic-bezier(.3,1.6,.5,1);
+        }
+        .pillar:nth-child(2) .p-icon { background: rgba(26,35,126,.1); color: var(--navy); }
+        .pillar:hover .p-icon { transform: scale(1.1) rotate(-6deg); }
+        .pillar .p-icon .icon { width: 28px; height: 28px; }
+        .pillar h3 { font-size: 1.3rem; color: var(--navy); font-weight: 800; margin-bottom: 12px; }
+        .pillar p { color: var(--muted); font-size: .97rem; }
+        .pillar p + p { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink); font-weight: 600; }
+
+        /* =========================================================
+           NÚMEROS
+           ========================================================= */
+        .numbers { background: var(--navy-deep); color: #fff; position: relative; overflow: hidden; }
+        .numbers::before {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background-image: linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 40px 40px;
+        }
+        .numbers .wrap { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+        .stat { padding: clamp(24px, 2.6vw, 36px) 16px; text-align: center; }
+        .stat + .stat { border-left: 1px solid var(--line-dark); }
+        .stat .val {
+            font-family: var(--f-display); font-weight: 800; 
+            font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 1; color: #fff; letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums;
+        }
+        .stat .val .u { color: var(--orange); }
+        .stat .lbl { color: #aab1e8; margin-top: 10px; font-size: .98rem; }
+
+        /* =========================================================
+           SERVIÇOS
+           ========================================================= */
+        .services { padding: clamp(24px, 2.6vw, 38px) 0; background: #fff; }
+        .services-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; flex-wrap: wrap; margin-bottom: 30px; }
+        .group-title {
+            display: flex; align-items: center; gap: 14px; font-size: 1.4rem; color: var(--navy); font-weight: 700;
+            margin: 0 0 16px; font-family: var(--f-display);
+        }
+        .group-title .g-icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--orange); color: #fff; }
+        .group-title .g-icon.navy { background: var(--navy); }
+        .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-bottom: 30px; }
+        .svc {
+            position: relative; background: #fff; padding: 28px 26px 30px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+            transition: background-color .35s;
+        }
+        .svc::after { /* condutor que energiza no hover */
+            content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
+            background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .55s var(--ease-out);
+        }
+        .svc:hover { background: #fbfbfe; }
+        .svc:hover::after { transform: scaleX(1); }
+        .svc .s-icon {
+            width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+            background: rgba(245,124,0,.1); color: var(--orange); transition: background-color .35s, color .35s;
+        }
+        .svc:hover .s-icon { background: var(--orange); color: #fff; }
+        .svc .s-icon svg * { stroke-dasharray: 60; stroke-dashoffset: 0; }
+        .svc:hover .s-icon svg * { animation: trace .9s var(--ease) both; }
+        @keyframes trace { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
+        .svc h4 { font-size: 1.12rem; color: var(--navy); font-weight: 700; margin-bottom: 6px; font-family: var(--f-display); }
+        .svc p { color: var(--muted); font-size: .93rem; line-height: 1.5; }
+
+        .reports { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .report {
+            display: flex; align-items: center; justify-content: space-between; gap: 18px;
+            padding: 20px 22px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line);
+            transition: border-color .3s, background-color .3s, transform .3s var(--ease);
+        }
+        .report:hover { border-color: var(--navy); background: #fff; transform: translateX(4px); }
+        .report span { font-weight: 600; color: var(--ink); }
+        .report .norm {
+            flex-shrink: 0; font-family: var(--f-display); font-weight: 700; font-size: .85rem; 
+            color: var(--navy); background: #fff; border: 1.5px solid var(--navy); border-radius: 7px; padding: 4px 10px; font-style: normal;
+            transition: background-color .3s, color .3s;
+        }
+        .report:hover .norm { background: var(--navy); color: #fff; }
+
+        /* =========================================================
+           PORTFÓLIO
+           ========================================================= */
+        .portfolio { padding: clamp(24px, 2.6vw, 38px) 0; background: var(--paper); }
+        .portfolio-head { margin-bottom: 22px; }
+        .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+        .filter-btn {
+            padding: 10px 18px; border-radius: 100px; border: 1.5px solid var(--line); background: #fff;
+            color: var(--muted); font-weight: 600; font-size: .93rem; transition: all .25s var(--ease);
+        }
+        .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+        .filter-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+        .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .project-card {
+            position: relative; border-radius: 16px; overflow: hidden; background: #fff; cursor: pointer;
+            border: 1px solid var(--line); text-align: left; padding: 0; color: inherit;
+            transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out);
+        }
+        .project-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -30px rgba(20,28,102,.5); }
+        .project-card .ph { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #dfe2ee; }
+        .project-card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+        .project-card:hover .ph img { transform: scale(1.07); }
+        .project-card .ph::after {
+            content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,20,80,.75), transparent 55%);
+            opacity: 0; transition: opacity .45s;
+        }
+        .project-card:hover .ph::after { opacity: 1; }
+        .project-card .more {
+            position: absolute; left: 18px; bottom: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 8px;
+            color: #fff; font-weight: 600; font-size: .92rem; opacity: 0; transform: translateY(12px);
+            transition: opacity .4s, transform .45s var(--ease-out);
+        }
+        .project-card:hover .more, .project-card:focus-visible .more { opacity: 1; transform: none; }
+        .project-card .meta { padding: 18px 20px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        .project-card h3 { font-size: 1.12rem; color: var(--navy); font-weight: 700; }
+        .project-card .cat { color: var(--muted); font-size: .9rem; margin-top: 3px; }
+        .project-card { border-bottom: 4px solid var(--orange); }
+        .project-card:nth-child(even) { border-bottom-color: var(--navy); }
+        .project-card.hide { display: none; }
+        .project-card.pop { animation: pop .5s var(--ease-out) both; }
+        @keyframes pop { from { opacity: 0; transform: scale(.96) translateY(10px); } }
+
+        /* =========================================================
+           CLIENTES — esteira contínua
+           ========================================================= */
+        .clients { padding: 26px 0; background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .clients p.title { text-align: center; color: var(--muted); font-weight: 600; margin-bottom: 22px; }
+        .marquee {
+            overflow: hidden; position: relative;
+            mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+        }
+        .marquee-track { display: flex; width: max-content; animation: marquee 55s linear infinite; }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        .marquee-set { display: flex; align-items: center; gap: 72px; padding-right: 72px; }
+        .marquee img { width: auto; max-width: none; object-fit: contain; transition: transform .35s var(--ease); }
+        .marquee img:hover { transform: scale(1.1); }
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+        /* =========================================================
+           CHAMADA FINAL
+           ========================================================= */
+        .cta { position: relative; overflow: hidden; background: var(--orange); color: #fff; padding: clamp(28px, 3vw, 40px) 0; }
+        .cta::before {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background-image: linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(90deg, transparent, #000 60%); -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
+        }
+        .cta .wrap { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+        .cta h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;  letter-spacing: -0.02em; }
+        .cta p { color: rgba(255,255,255,.92); margin-top: 10px; font-size: 1.08rem; }
+        .cta .btn { background: #fff; color: var(--orange); box-shadow: 0 20px 40px -18px rgba(0,0,0,.35); }
+        .cta .btn:hover { background: var(--navy); color: #fff; }
+
+        /* =========================================================
+           CONTATO
+           ========================================================= */
+        .contact { position: relative; overflow: hidden; background: var(--navy-ink); color: #fff; padding: clamp(32px, 3.4vw, 48px) 0; }
+        .contact::before {
+            content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -160px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(245,124,0,.22), transparent 65%); pointer-events: none;
+        }
+        .contact-grid { position: relative; display: grid; grid-template-columns: 5fr 7fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+        .contact h2 { font-size: clamp(2.2rem, 4.4vw, 3.3rem); font-weight: 800;  letter-spacing: -0.02em; margin-bottom: 18px; }
+        .contact .lead { color: #c3c8ee; font-size: 1.1rem; margin-bottom: 40px; max-width: 42ch; }
+        .c-item { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+        .c-item .ci { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.07); border: 1px solid var(--line-dark); color: var(--orange); }
+        .c-item small { display: block; color: #9da4d9; font-size: .85rem; }
+        .c-item b { font-size: 1.15rem; font-weight: 600; }
+        .form-card { background: #fff; color: var(--ink); border-radius: 20px; padding: clamp(26px, 4vw, 44px); box-shadow: 0 50px 100px -40px rgba(0,0,0,.6); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .field { margin-bottom: 18px; }
+        .field label { display: block; font-weight: 600; font-size: .92rem; margin-bottom: 8px; color: var(--ink); }
+        .field input, .field textarea {
+            width: 100%; padding: 14px 16px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--paper);
+            font: inherit; color: var(--ink); transition: border-color .25s, box-shadow .25s, background-color .25s; resize: vertical;
+        }
+        .field input:focus, .field textarea:focus { outline: none; border-color: var(--orange); background: #fff; box-shadow: 0 0 0 4px rgba(245,124,0,.15); }
+        .form-card .btn { width: 100%; margin-top: 6px; }
+        .form-card .btn-primary:hover { background: var(--navy); box-shadow: 0 14px 34px -12px rgba(20,28,102,.7); }
+
+        .map { height: 320px; background: #dfe2ee; }
+        .map iframe { width: 100%; height: 100%; border: 0; filter: saturate(.7); }
+
+        /* =========================================================
+           RODAPÉ
+           ========================================================= */
+        footer { background: var(--navy-deep); color: #c3c8ee; padding: 48px 0 24px; border-top: 3px solid var(--orange); }
+        .foot-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; margin-bottom: 32px; }
+        footer h2 { color: #fff; font-size: 1.5rem; font-weight: 800;  margin-bottom: 14px; }
+        footer h3 { color: var(--orange); font-size: 1rem; font-weight: 700; margin-bottom: 20px; font-family: var(--f-display); }
+        footer .f-link { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; transition: color .25s; }
+        footer .f-link:hover { color: #fff; }
+        footer .f-link .fi { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.07); flex-shrink: 0; transition: background-color .25s; }
+        footer .f-link:hover .fi { background: var(--orange); }
+        footer .f-link .fi svg { width: 16px; height: 16px; }
+        footer ul { list-style: none; margin: 0; padding: 0; }
+        footer ul a { display: inline-block; padding: 5px 0; transition: color .25s, transform .25s var(--ease); }
+        footer ul a:hover { color: #fff; transform: translateX(4px); }
+        .copy { border-top: 1px solid var(--line-dark); padding-top: 26px; text-align: center; font-size: .85rem; color: #8a91c6; }
+
+        /* =========================================================
+           WHATSAPP FLUTUANTE
+           ========================================================= */
         .whatsapp-float {
-            position: fixed; width: 60px; height: 60px; bottom: 30px; right: 20px;
-            background-color: #25d366; color: #FFF; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.4); z-index: 100; transition: transform 0.3s;
+            position: fixed; right: 20px; bottom: 24px; z-index: 60; width: 60px; height: 60px; border-radius: 50%;
+            background: var(--green); color: #fff; display: grid; place-items: center;
+            box-shadow: 0 12px 30px -8px rgba(37,211,102,.7); transition: transform .3s var(--ease);
+            animation: up .6s var(--ease-out) 3s both;
         }
-        .whatsapp-float:hover { transform: scale(1.1); background-color: #20ba5a; }
+        .whatsapp-float::before {
+            content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--green);
+            animation: ping 2.6s ease-out 4s infinite;
+        }
+        @keyframes ping { 0% { transform: scale(1); opacity: .8; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+        .whatsapp-float:hover { transform: scale(1.08); }
+        .whatsapp-float svg { width: 28px; height: 28px; }
 
-        /* Modal Correção */
-        .modal-open { overflow: hidden; }
+        /* =========================================================
+           MODAL
+           ========================================================= */
+        .modal {
+            position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 16px;
+            background: rgba(10,14,50,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
+        }
+        .modal.open { opacity: 1; visibility: visible; }
+        .modal-box {
+            position: relative; width: 100%; max-width: 940px; max-height: calc(100vh - 32px); overflow: auto;
+            background: #fff; border-radius: 20px; display: grid; grid-template-columns: 1fr 1fr;
+            transform: translateY(24px) scale(.97); transition: transform .45s var(--ease-out);
+            box-shadow: 0 60px 120px -40px rgba(0,0,0,.6);
+        }
+        .modal.open .modal-box { transform: none; }
+        .modal-img { min-height: 320px; background: #dfe2ee; }
+        .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-body { padding: 38px 34px; display: flex; flex-direction: column; }
+        .modal-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--paper); color: var(--ink); display: grid; place-items: center; transition: background-color .25s, color .25s, transform .3s var(--ease); z-index: 2; }
+        .modal-close:hover { background: var(--orange); color: #fff; transform: rotate(90deg); }
+        .modal-body .k { color: var(--orange); font-weight: 600; font-size: .9rem; margin-bottom: 8px; }
+        .modal-body h3 { font-size: 1.8rem; color: var(--navy); font-weight: 800;  margin-bottom: 10px; padding-right: 40px; }
+        .modal-loc { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .95rem; margin-bottom: 16px; }
+        .modal-loc svg { width: 16px; height: 16px; }
+        .modal-desc { border-left: 3px solid var(--orange); padding-left: 12px; color: var(--ink); margin-bottom: 22px; }
+        .modal-body h4 { font-size: .95rem; color: var(--navy); margin-bottom: 12px; }
+        .modal-list { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 10px; color: #40456a; font-size: .96rem; flex-grow: 1; }
+        .modal-list li { display: flex; gap: 10px; align-items: flex-start; opacity: 0; transform: translateX(-8px); }
+        .modal.open .modal-list li { animation: li .45s var(--ease-out) both; }
+        @keyframes li { to { opacity: 1; transform: none; } }
+        .modal-list li svg { width: 18px; height: 18px; color: var(--orange); flex-shrink: 0; margin-top: 2px; }
+        body.modal-open { overflow: hidden; }
+
+        /* =========================================================
+           REVELAÇÃO AO ROLAR (uma só, discreta)
+           ========================================================= */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease-out, transform .8s ease-out; }
+        .reveal.in { opacity: 1; transform: none; }
+        .stagger > * { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
+        .stagger.in > * { opacity: 1; transform: none; }
+
+        /* =========================================================
+           RESPONSIVO
+           ========================================================= */
+        @media (max-width: 1024px) {
+            .projects { grid-template-columns: repeat(2, 1fr); }
+            .svc-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .menu-btn { display: block; }
+            .hero { height: auto; min-height: 100svh; align-items: flex-start; padding: 104px 0 56px; }
+            .sld { height: auto; width: 100%; min-height: 0; max-width: 400px; margin: 0 auto; }
+            .hero-grid { grid-template-columns: 1fr; gap: 26px; }
+            .hero-grid > div:first-child { justify-content: flex-start; gap: 22px; padding: 0; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-figure { order: -1; margin: 0 0 30px 30px; min-height: 0; }
+            .about-figure .frame { position: relative; inset: auto; height: auto; aspect-ratio: 4 / 3.4; }
+            .pillars { grid-template-columns: 1fr; }
+            .numbers .wrap { grid-template-columns: repeat(2, 1fr); }
+            .stat:nth-child(3) { border-left: 0; }
+            .stat:nth-child(n+3) { border-top: 1px solid var(--line-dark); }
+            .reports { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .foot-grid { grid-template-columns: 1fr; gap: 36px; }
+            .modal-box { grid-template-columns: 1fr; }
+            .modal-img { min-height: 220px; max-height: 260px; }
+        }
+        @media (max-width: 640px) {
+            .projects, .svc-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .hero-ctas .btn { width: 100%; }
+            .seal { width: 118px; height: 118px; left: -26px; bottom: -26px; }
+            .seal .num { font-size: 2.4rem; }
+            .seal svg.ring text { font-size: 9px; letter-spacing: 2px; }
+            .stat { padding: 30px 16px; }
+            .marquee-set { gap: 50px; padding-right: 50px; }
+            .marquee-track { zoom: .78; }
+            .scroll-hint { display: none; }
+        }
+
+        /* Movimento reduzido: tudo aparece no estado final, sem animação */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+            .sld .flow { opacity: 1; }
+            .reveal, .stagger > * { opacity: 1; transform: none; }
+            .about-figure .frame { clip-path: none; }
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body>
 
     <!-- WHATSAPP FLUTUANTE -->
-    <a href="https://wa.me/5583999695125?text=Olá, visitei o site e gostaria de um orçamento." class="whatsapp-float" target="_blank" title="Falar no WhatsApp">
-        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    <a href="https://wa.me/5583999695125?text=Olá, visitei o site e gostaria de um orçamento." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+        <i data-lucide="message-circle"></i>
     </a>
 
-    <!-- NAV BAR (Com Animação de Descida) -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 animate-nav">
-        <div class="container mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
-            <a href="#" class="flex items-center">
-                <img src="fotos/logo.png" alt="Amadeu Projetos" class="h-12 md:h-16 w-auto object-contain hover:opacity-90 transition">
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <div class="wrap">
+            <a href="#home" class="nav-logo" aria-label="Amadeu Projetos, início">
+                <img src="fotos/logo.png" alt="Amadeu Projetos">
             </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Início</a>
-                <a href="#sobre" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">A Empresa</a>
-                <a href="#servicos" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Serviços</a>
-                <a href="#portfolio" class="text-sm font-bold text-navy hover:text-orange uppercase tracking-wide transition">Portfólio</a>
-                <a href="https://wa.me/5583999695125" target="_blank" class="px-6 py-2 bg-green-500 text-white font-bold rounded shadow hover:bg-green-600 transition flex items-center gap-2 hover:-translate-y-1 transform duration-200">
-                    <i data-lucide="phone" class="w-4 h-4"></i> WhatsApp
-                </a>
+            <div class="nav-links">
+                <a href="#home" class="link">Início</a>
+                <a href="#sobre" class="link">A Empresa</a>
+                <a href="#servicos" class="link">Serviços</a>
+                <a href="#portfolio" class="link">Portfólio</a>
+                <a href="https://wa.me/5583999695125" target="_blank" rel="noopener" class="btn btn-whats"><i data-lucide="phone" class="icon"></i> WhatsApp</a>
             </div>
-            <button class="md:hidden text-navy p-2 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <i data-lucide="menu" class="w-8 h-8"></i>
-            </button>
+            <button class="menu-btn" id="menu-btn" aria-label="Abrir menu" aria-expanded="false"><i data-lucide="menu" class="icon"></i></button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 p-4 shadow-xl absolute w-full left-0 z-50">
-            <a href="#home" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">Início</a>
-            <a href="#sobre" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">A Empresa</a>
-            <a href="#servicos" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">Serviços</a>
-            <a href="#portfolio" class="block py-3 text-navy font-bold border-b border-gray-50" onclick="this.parentElement.classList.add('hidden')">Portfólio</a>
-            <a href="https://wa.me/5583999695125" class="block py-3 text-green-600 font-bold bg-green-50 rounded mt-2 text-center">Falar no WhatsApp</a>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#home">Início</a>
+            <a href="#sobre">A Empresa</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="https://wa.me/5583999695125" class="btn btn-whats">Falar no WhatsApp</a>
         </div>
+        <div class="progress" id="progress"></div>
     </nav>
 
-    <!-- HERO SECTION (Com Animação em Cascata) -->
-    <section id="home" class="relative h-screen min-h-[600px] flex items-center pt-20 hero-bg">
-        <div class="absolute inset-0 hero-gradient"></div>
-        <div class="container mx-auto px-6 relative z-10 flex flex-col justify-center h-full pb-10">
-            <div class="max-w-4xl text-white">
-                
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 px-4 py-1 mb-6 border border-orange bg-navy/60 text-orange text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-sm animate-hero-element delay-100">
-                    <span class="w-2 h-2 bg-orange rounded-full animate-pulse"></span> Desde 1996
-                </div>
-                
-                <!-- Título -->
-                <h1 class="text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 font-heading animate-hero-element delay-300">
-                    Engenharia com <br>Segurança e Inovação.
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <div class="hero-photo" aria-hidden="true"></div>
+        <div class="wrap hero-grid">
+            <div>
+                <div class="hero-badge"><b>30 anos</b> Desde 1996</div>
+                <div class="hero-mid">
+                <h1>
+                    <span class="line"><span class="word" style="animation-delay:.25s">Engenharia</span> <span class="word" style="animation-delay:.33s">com</span></span>
+                    <span class="line"><span class="word" style="animation-delay:.41s">Segurança</span> <span class="word" style="animation-delay:.49s">e</span></span>
+                    <span class="line"><span class="word" style="animation-delay:.57s">Inovação.</span></span>
                 </h1>
-                
-                <!-- Texto -->
-                <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl font-light leading-relaxed animate-hero-element delay-500">
-                    Projetos Elétricos e consultorias técnicas que garantem eficiência, conformidade e desempenho em cada obra.
-                </p>
-                
-                <!-- Botões -->
-                <div class="flex flex-col sm:flex-row gap-4 animate-hero-element delay-700">
-                    <a href="https://wa.me/5583999695125" class="px-8 py-4 bg-orange text-white font-bold rounded hover:bg-orange/90 transition shadow-lg shadow-orange/30 text-center block w-full sm:w-auto flex items-center justify-center gap-2 group">
-                        <i data-lucide="message-circle" class="w-5 h-5 animate-bounce"></i> Solicitar Orçamento
-                    </a>
-                    <a href="#portfolio" class="px-8 py-4 bg-transparent border border-white text-white font-bold rounded hover:bg-white hover:text-navy transition text-center block w-full sm:w-auto">
-                        Conhecer Obras
-                    </a>
+                <p class="hero-lead">Projetos Elétricos e consultorias técnicas que garantem eficiência, conformidade e desempenho em cada obra.</p>
                 </div>
-
+                <div class="hero-ctas">
+                    <a href="https://wa.me/5583999695125" target="_blank" rel="noopener" class="btn btn-primary magnetic"><i data-lucide="message-circle" class="icon"></i> Solicitar Orçamento</a>
+                    <a href="#portfolio" class="btn btn-ghost magnetic">Conhecer Obras</a>
+                </div>
             </div>
+
+            <!-- Diagrama unifilar: desenha, fecha o disjuntor geral e energiza as cargas -->
+            <svg class="sld" viewBox="0 0 520 600" role="img" aria-label="Diagrama unifilar animado: rede, transformador, quadro geral e cargas sendo energizadas">
+                <!-- rede de média tensão -->
+                <path class="w draw" pathLength="1" d="M260 18 V92" style="animation-delay:.3s"/>
+                <g class="fade" style="animation-delay:.5s">
+                    <path class="w" d="M250 48 l20 -8 M250 56 l20 -8 M250 64 l20 -8"/>
+                    <text class="txt" x="282" y="40">REDE 13,8 kV</text>
+                </g>
+                <!-- disjuntor de média -->
+                <rect class="sym draw" pathLength="1" x="246" y="92" width="28" height="28" rx="3" style="animation-delay:.55s"/>
+                <text class="txt-b fade" x="252" y="111" style="animation-delay:.8s;font-size:11px">52</text>
+                <path class="w draw" pathLength="1" d="M260 120 V148" style="animation-delay:.7s"/>
+                <!-- transformador -->
+                <circle class="sym draw" pathLength="1" cx="260" cy="176" r="28" style="animation-delay:.8s"/>
+                <circle class="sym draw" pathLength="1" cx="260" cy="214" r="28" style="animation-delay:.95s;fill:rgba(14,20,80,.35)"/>
+                <g class="fade" style="animation-delay:1.2s">
+                    <text class="txt-b" x="302" y="190">TR 500 kVA</text>
+                    <text class="txt kv" x="302" y="207">13,8 kV / 380 V</text>
+                </g>
+                <!-- aterramento do neutro -->
+                <path class="w draw" pathLength="1" d="M232 214 H190 V250" style="animation-delay:1.1s"/>
+                <path class="w fade" d="M176 250 H204 M181 258 H199 M186 266 H194" style="animation-delay:1.35s"/>
+                <path class="w draw" pathLength="1" d="M260 242 V280" style="animation-delay:1.1s"/>
+                <!-- disjuntor geral BT -->
+                <circle cx="260" cy="282" r="4" fill="#fff" class="fade" style="animation-delay:1.3s"/>
+                <circle cx="260" cy="322" r="4" fill="#fff" class="fade" style="animation-delay:1.3s"/>
+                <line class="w blade" x1="260" y1="322" x2="260" y2="282" style="stroke:#fff;stroke-width:3"/>
+                <circle class="spark" cx="260" cy="282" r="10" fill="none" stroke="#ffb35c" stroke-width="2"/>
+                <text class="txt fade" x="276" y="306" style="animation-delay:1.4s">DISJUNTOR GERAL</text>
+                <path class="w draw" pathLength="1" d="M260 322 V360" style="animation-delay:1.2s"/>
+                <!-- barramento QGBT -->
+                <path class="w bus draw" pathLength="1" d="M60 360 H460" style="animation-delay:1.3s"/>
+                <text class="txt-b fade" x="60" y="348" style="animation-delay:1.6s">QGBT</text>
+
+                <!-- alimentadores -->
+                <path class="w draw" pathLength="1" d="M110 360 V402 M110 424 V492" style="animation-delay:1.5s"/>
+                <path class="w draw" pathLength="1" d="M210 360 V402 M210 424 V492" style="animation-delay:1.58s"/>
+                <path class="w draw" pathLength="1" d="M310 360 V402 M310 424 V492" style="animation-delay:1.66s"/>
+                <path class="w draw" pathLength="1" d="M410 360 V402 M410 424 V492" style="animation-delay:1.74s"/>
+                <g class="fade" style="animation-delay:1.8s">
+                    <rect class="sym" x="100" y="402" width="20" height="22" rx="2"/><path class="w" d="M104 407 l12 12 M116 407 l-12 12"/>
+                    <rect class="sym" x="200" y="402" width="20" height="22" rx="2"/><path class="w" d="M204 407 l12 12 M216 407 l-12 12"/>
+                    <rect class="sym" x="300" y="402" width="20" height="22" rx="2"/><path class="w" d="M304 407 l12 12 M316 407 l-12 12"/>
+                    <rect class="sym" x="400" y="402" width="20" height="22" rx="2"/><path class="w" d="M404 407 l12 12 M416 407 l-12 12"/>
+                </g>
+
+                <!-- cargas -->
+                <g class="fade" style="animation-delay:1.9s">
+                    <!-- motor -->
+                    <circle class="sym" cx="110" cy="518" r="26"/>
+                    <g class="rotor"><path d="M110 498 V538 M90 518 H130" stroke="rgba(255,255,255,.18)" stroke-width="2"/></g>
+                    <text class="txt-b" x="102" y="523" style="font-size:15px">M</text>
+                    <text class="txt" x="110" y="566" text-anchor="middle">MOTOR</text>
+                    <!-- iluminação -->
+                    <circle class="sym lamp" cx="210" cy="518" r="20"/>
+                    <path class="w" d="M196 504 l28 28 M224 504 l-28 28" style="stroke:#fff"/>
+                    <text class="txt" x="210" y="566" text-anchor="middle">ILUMINAÇÃO</text>
+                    <!-- quadro de distribuição -->
+                    <rect class="sym" x="286" y="498" width="48" height="40" rx="4"/>
+                    <text class="txt-b" x="296" y="523" style="font-size:12px">QD1</text>
+                    <circle class="qd-led" cx="326" cy="506" r="3"/>
+                    <text class="txt" x="310" y="566" text-anchor="middle">QUADRO</text>
+                    <!-- iluminação pública -->
+                    <circle class="sym lamp" cx="410" cy="518" r="20" style="animation-delay:3.05s"/>
+                    <path class="w" d="M396 504 l28 28 M424 504 l-28 28" style="stroke:#fff"/>
+                    <text class="txt" x="410" y="566" text-anchor="middle">ILUM. PÚBLICA</text>
+                </g>
+
+                <!-- corrente -->
+                <path class="flow glow up" d="M260 18 V92 M260 120 V148 M260 242 V280"/>
+                <path class="flow glow down" d="M260 322 V360 H110 V402"/>
+                <path class="flow glow down" d="M260 360 H210 V402" style="stroke-dashoffset:-20"/>
+                <path class="flow glow down" d="M260 360 H310 V402" style="stroke-dashoffset:-35"/>
+                <path class="flow glow down" d="M260 360 H410 V402" style="stroke-dashoffset:-50"/>
+                <path class="flow glow down" d="M110 424 V492 M210 424 V498 M310 424 V498 M410 424 V498"/>
+                <path class="flow up" d="M260 18 V92 M260 120 V148 M260 242 V280"/>
+                <path class="flow down" d="M260 322 V360 H110 V402"/>
+                <path class="flow down" d="M260 360 H210 V402" style="stroke-dashoffset:-20"/>
+                <path class="flow down" d="M260 360 H310 V402" style="stroke-dashoffset:-35"/>
+                <path class="flow down" d="M260 360 H410 V402" style="stroke-dashoffset:-50"/>
+                <path class="flow down" d="M110 424 V492 M210 424 V498 M310 424 V498 M410 424 V498"/>
+            </svg>
         </div>
+        <a href="#sobre" class="scroll-hint" aria-label="Rolar para a empresa"></a>
     </section>
 
     <!-- SOBRE A EMPRESA -->
-    <section id="sobre" class="pt-16 md:pt-20 pb-28 bg-gray-50 relative z-20 reveal">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row gap-16 items-center mb-16">
-                <div class="lg:w-1/2">
-                    <span class="text-orange font-bold uppercase tracking-wider text-xs">Sobre Nós</span>
-                    <h2 class="text-3xl font-extrabold text-navy mt-2 mb-6 font-heading">Nossa História & Tradição</h2>
-                    <div class="space-y-4 text-gray-700 leading-relaxed text-justify text-sm md:text-base">
+    <section id="sobre" class="about">
+        <div class="wrap">
+            <div class="about-grid">
+                <div class="reveal">
+                    <span class="kicker">Sobre nós</span>
+                    <h2 class="section-title">Nossa História &amp; Tradição</h2>
+                    <div class="about-text">
                         <p>Fundada em 10 de setembro de 1996, em Campina Grande – PB, a <strong>Amadeu Projetos e Construções Ltda</strong> consolidou-se como uma empresa de referência no setor da engenharia, unindo tradição, inovação e excelência técnica. Idealizada pelo Engenheiro Eletricista <strong>Ricardo Amadeu Aranha Costa</strong>, a empresa nasceu com o propósito de oferecer soluções eficientes, seguras e totalmente alinhadas às normas técnicas vigentes.</p>
-                        <p>Ao longo de quase três décadas de atuação, construímos uma trajetória marcada por profissionalismo, responsabilidade e compromisso com a qualidade. Atualmente, contamos com uma equipe técnica multidisciplinar, composta por três engenheiros eletricistas, um arquiteto e dois desenhistas especializados em CAD.</p>
+                        <p>Ao longo de três décadas de atuação, construímos uma trajetória marcada por profissionalismo, responsabilidade e compromisso com a qualidade. Atualmente, contamos com uma equipe técnica multidisciplinar, composta por três engenheiros eletricistas, um arquiteto e dois desenhistas especializados em CAD.</p>
                         <p>Além do nosso corpo técnico interno, dispomos também de uma ampla rede de profissionais parceiros, permitindo atender todas as disciplinas necessárias para o desenvolvimento completo de projetos, independentemente do porte ou complexidade.</p>
                         <p>Guiamos nossa atuação pelos pilares da segurança, eficiência, responsabilidade técnica e inovação, garantindo que cada entrega seja rigorosamente elaborada, tecnicamente consistente e adaptada às necessidades específicas de cada cliente.</p>
                         <p>Ao escolher a Amadeu Projetos, você conta com uma empresa experiente e comprometida em transformar demandas em soluções funcionais e de alto desempenho.</p>
                     </div>
                 </div>
-                <div class="lg:w-1/2 w-full">
-                    <img src="fotos/historia.jpg" class="rounded-xl shadow-lg w-full h-auto object-cover border-4 border-white" alt="Equipe de Engenharia">
+                <div class="about-figure" id="about-figure">
+                    <div class="frame"><img src="fotos/historia.jpg" alt="Engenheiro trabalhando em projeto elétrico" loading="lazy"></div>
+                    <div class="seal" aria-label="30 anos, desde 1996">
+                        <svg class="ring" viewBox="0 0 150 150" aria-hidden="true">
+                            <defs><path id="circ" d="M75 75 m-58 0 a58 58 0 1 1 116 0 a58 58 0 1 1 -116 0"/></defs>
+                            <text><textPath href="#circ">AMADEU PROJETOS ✦ DESDE 1996 ✦ </textPath></text>
+                        </svg>
+                        <div class="num">30<small>anos</small></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-orange hover:-translate-y-2 transition duration-300">
-                    <div class="w-14 h-14 bg-orange/10 rounded-full flex items-center justify-center mb-6"><i data-lucide="target" class="w-8 h-8 text-orange"></i></div>
-                    <h3 class="text-xl font-bold text-navy mb-4 font-heading">Nosso Objetivo</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm">Projetar garantindo a segurança das normas, com inovação e qualidade e principalmente com o custo justo e acessível.</p>
+            <div class="pillars stagger">
+                <div class="pillar">
+                    <div class="p-icon"><i data-lucide="target" class="icon"></i></div>
+                    <h3>Nosso Objetivo</h3>
+                    <p>Projetar garantindo a segurança das normas, com inovação e qualidade e principalmente com o custo justo e acessível.</p>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-navy hover:-translate-y-2 transition duration-300">
-                    <div class="w-14 h-14 bg-navy/10 rounded-full flex items-center justify-center mb-6"><i data-lucide="shield-check" class="w-8 h-8 text-navy"></i></div>
-                    <h3 class="text-xl font-bold text-navy mb-4 font-heading">Qualidade Garantida</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm">A empresa vem atuando de forma efetiva em projetos de instalações elétricas, pareceres técnicos e consultorias, procurando sempre inovar no atendimento aos clientes.</p>
+                <div class="pillar">
+                    <div class="p-icon"><i data-lucide="shield-check" class="icon"></i></div>
+                    <h3>Qualidade Garantida</h3>
+                    <p>A empresa vem atuando de forma efetiva em projetos de instalações elétricas, pareceres técnicos e consultorias, procurando sempre inovar no atendimento aos clientes.</p>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-orange hover:-translate-y-2 transition duration-300">
-                    <div class="w-14 h-14 bg-orange/10 rounded-full flex items-center justify-center mb-6"><i data-lucide="users" class="w-8 h-8 text-orange"></i></div>
-                    <h3 class="text-xl font-bold text-navy mb-4 font-heading">Atendimento Único</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm mb-4">Cada projeto elaborado passa por uma revisão criteriosa de todos os engenheiros da empresa, para garantir que o melhor resultado chegue até o cliente.</p>
-                    <p class="text-gray-600 leading-relaxed text-sm font-semibold border-t border-gray-100 pt-2">A Amadeu Projetos trata cada cliente como único. Cada cliente tem sua necessidade, sonho e desejo.</p>
+                <div class="pillar">
+                    <div class="p-icon"><i data-lucide="users" class="icon"></i></div>
+                    <h3>Atendimento Único</h3>
+                    <p>Cada projeto elaborado passa por uma revisão criteriosa de todos os engenheiros da empresa, para garantir que o melhor resultado chegue até o cliente.</p>
+                    <p>A Amadeu Projetos trata cada cliente como único. Cada cliente tem sua necessidade, sonho e desejo.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTADORES -->
-    <section class="bg-navy text-white py-12 relative z-20 reveal" id="counters">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                <div class="p-2">
-                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold"><span class="text-3xl md:text-4xl">+</span><span class="text-3xl md:text-4xl counter" data-target="29">0</span></div>
-                    <span class="text-sm md:text-base text-gray-300 block mt-1">Anos de Mercado</span>
-                </div>
-                <div class="p-2">
-                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold"><span class="text-3xl md:text-4xl">+</span><span class="text-3xl md:text-4xl counter" data-target="1876">0</span></div>
-                    <span class="text-sm md:text-base text-gray-300 block mt-1">ARTs Emitidas</span>
-                </div>
-                <div class="p-2">
-                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold"><span class="text-3xl md:text-4xl">+</span><span class="text-3xl md:text-4xl counter" data-target="100">0</span></div>
-                    <span class="text-sm md:text-base text-gray-300 block mt-1">Clientes Corporativos</span>
-                </div>
-                <div class="p-2">
-                    <div class="flex justify-center items-baseline gap-1 text-orange font-bold"><span class="text-3xl md:text-4xl counter" data-target="100">0</span><span class="text-3xl md:text-4xl">%</span></div>
-                    <span class="text-sm md:text-base text-gray-300 block mt-1">Dentro das Normas</span>
-                </div>
-            </div>
+    <!-- NÚMEROS -->
+    <section class="numbers" id="counters" aria-label="Números da empresa">
+        <div class="wrap">
+            <div class="stat"><div class="val"><span class="u">+</span><span class="counter" data-target="30">30</span></div><div class="lbl">Anos de Mercado</div></div>
+            <div class="stat"><div class="val"><span class="u">+</span><span class="counter" data-target="1876">1876</span></div><div class="lbl">ARTs Emitidas</div></div>
+            <div class="stat"><div class="val"><span class="u">+</span><span class="counter" data-target="100">100</span></div><div class="lbl">Clientes Corporativos</div></div>
+            <div class="stat"><div class="val"><span class="counter" data-target="100">100</span><span class="u">%</span></div><div class="lbl">Dentro das Normas</div></div>
         </div>
     </section>
 
     <!-- SERVIÇOS -->
-      <!-- SERVIÇOS EM GRID (NOVO LAYOUT) -->
-    <section id="servicos" class="py-20 bg-gray-50 reveal">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-orange font-bold uppercase tracking-wider text-sm">O Que Fazemos</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-navy mt-2 font-heading">Nossos Serviços</h2>
-                <div class="w-20 h-1.5 bg-orange mx-auto mt-4 rounded-full"></div>
-                <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Soluções completas divididas em projetos elétricos de alta complexidade e laudos técnicos normativos.</p>
+    <section id="servicos" class="services">
+        <div class="wrap">
+            <div class="services-head reveal">
+                <div>
+                    <span class="kicker">O que fazemos</span>
+                    <h2 class="section-title">Nossos Serviços</h2>
+                </div>
+                <p class="section-lead" style="margin:0;max-width:58ch">Soluções completas divididas em projetos elétricos de alta complexidade e laudos técnicos normativos.</p>
             </div>
 
-            <!-- Projetos Elétricos -->
-            <h3 class="text-2xl font-bold text-navy mb-8 flex items-center gap-3">
-                <div class="p-2 bg-orange rounded-lg text-white"><i data-lucide="zap" class="w-6 h-6"></i></div>
-                Projetos Elétricos
-            </h3>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="check-circle-2" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Subestações</h4><p class="text-sm text-gray-500 mt-1">Aéreas, Abrigadas e Estudo de Coordenação e Seletividade.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="home" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Instalações Elétricas</h4><p class="text-sm text-gray-500 mt-1">Residenciais, Prediais e Industriais.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="activity" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Aterramento</h4><p class="text-sm text-gray-500 mt-1">Sistemas de proteção e segurança.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="lightbulb" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Iluminação Pública</h4><p class="text-sm text-gray-500 mt-1">Eficiência energética urbana.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="map" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Loteamentos</h4><p class="text-sm text-gray-500 mt-1">Infraestrutura elétrica completa.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="shield-alert" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Projetos de SPDA</h4><p class="text-sm text-gray-500 mt-1">E Gerenciamento de Risco.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="network" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Rede de Distribuição</h4><p class="text-sm text-gray-500 mt-1">Em Baixa e Média Tensão.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="sun" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Sistemas Fotovoltaicos</h4><p class="text-sm text-gray-500 mt-1">Energia solar e sustentabilidade.</p></div></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-transparent hover:border-orange hover:-translate-y-1 group"><div class="flex items-start gap-4"><i data-lucide="hammer" class="w-6 h-6 text-orange shrink-0 mt-1"></i><div><h4 class="font-bold text-navy text-lg group-hover:text-orange transition">Canteiro de Obras</h4><p class="text-sm text-gray-500 mt-1">Instalações temporárias.</p></div></div></div>
+            <h3 class="group-title"><span class="g-icon"><i data-lucide="zap" class="icon"></i></span> Projetos Elétricos</h3>
+            <div class="svc-grid stagger">
+                <div class="svc"><span class="s-icon"><i data-lucide="check-circle-2" class="icon"></i></span><div><h4>Subestações</h4><p>Aéreas, Abrigadas e Estudo de Coordenação e Seletividade.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="house" class="icon"></i></span><div><h4>Instalações Elétricas</h4><p>Residenciais, Prediais e Industriais.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="activity" class="icon"></i></span><div><h4>Aterramento</h4><p>Sistemas de proteção e segurança.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="lightbulb" class="icon"></i></span><div><h4>Iluminação Pública</h4><p>Eficiência energética urbana.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="map" class="icon"></i></span><div><h4>Loteamentos</h4><p>Infraestrutura elétrica completa.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="shield-alert" class="icon"></i></span><div><h4>Projetos de SPDA</h4><p>E Gerenciamento de Risco.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="network" class="icon"></i></span><div><h4>Rede de Distribuição</h4><p>Em Baixa e Média Tensão.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="sun" class="icon"></i></span><div><h4>Sistemas Fotovoltaicos</h4><p>Energia solar e sustentabilidade.</p></div></div>
+                <div class="svc"><span class="s-icon"><i data-lucide="hammer" class="icon"></i></span><div><h4>Canteiro de Obras</h4><p>Instalações temporárias.</p></div></div>
             </div>
 
-            <!-- Laudos Técnicos -->
-            <h3 class="text-2xl font-bold text-navy mb-8 flex items-center gap-3 border-t border-gray-200 pt-8">
-                <div class="p-2 bg-navy rounded-lg text-white"><i data-lucide="clipboard-check" class="w-6 h-6"></i></div>
-                Laudos Técnicos
-            </h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
-                    <span class="font-bold text-gray-700">Resistência de Aterramento (NBR 15749)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
-                    <span class="font-bold text-gray-700">SPDA - Sistema de Proteção Contra Descargas Atmosféricas (NBR 5419)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
-                    <span class="font-bold text-gray-700">Prontuário das Instalações (NR 10)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
-                    <span class="font-bold text-gray-700">Laudos de Baixa Tensão (NBR 5410)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-navy hover:bg-navy/5 group flex items-center justify-between">
-                    <span class="font-bold text-gray-700">Iluminação de Interiores (ISO/CIE 8995-1)</span><i data-lucide="check-circle" class="text-navy w-5 h-5"></i>
-                </div>
+            <h3 class="group-title"><span class="g-icon navy"><i data-lucide="clipboard-check" class="icon"></i></span> Laudos Técnicos</h3>
+            <div class="reports stagger">
+                <div class="report"><span>Resistência de Aterramento</span><em class="norm">NBR 15749</em></div>
+                <div class="report"><span>SPDA - Sistema de Proteção Contra Descargas Atmosféricas</span><em class="norm">NBR 5419</em></div>
+                <div class="report"><span>Prontuário das Instalações</span><em class="norm">NR 10</em></div>
+                <div class="report"><span>Laudos de Baixa Tensão</span><em class="norm">NBR 5410</em></div>
+                <div class="report"><span>Iluminação de Interiores</span><em class="norm">ISO/CIE 8995-1</em></div>
             </div>
         </div>
     </section>
 
     <!-- PORTFÓLIO -->
-    <section id="portfolio" class="py-20 bg-white border-t border-gray-100 reveal">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <span class="text-orange font-bold uppercase tracking-wider text-sm">Nossas Obras</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-navy mt-2 font-heading">Portfólio em Destaque</h2>
-                <div class="w-24 h-1 bg-orange mx-auto my-6"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">Navegue pelas categorias abaixo para conhecer nossa experiência.</p>
+    <section id="portfolio" class="portfolio">
+        <div class="wrap">
+            <div class="portfolio-head reveal">
+                <span class="kicker">Nossas obras</span>
+                <h2 class="section-title">Portfólio em Destaque</h2>
+                <p class="section-lead">Navegue pelas categorias abaixo para conhecer nossa experiência.</p>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
-                <button onclick="filterProjects('all')" class="filter-btn active px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Todos</button>
-                <button onclick="filterProjects('predial')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Predial</button>
-                <button onclick="filterProjects('comercial')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Comercial</button>
-                <button onclick="filterProjects('industrial')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Industrial</button>
-                <button onclick="filterProjects('saude')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Estabelecimentos de Saúde</button>
-                <button onclick="filterProjects('instituicoes')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Instituições</button>
-                <button onclick="filterProjects('geral')" class="filter-btn px-4 py-2 text-sm md:text-base md:px-6 rounded-full border border-gray-200 text-gray-600 font-semibold transition duration-300 transform hover:scale-110 hover:bg-navy hover:text-white">Geral</button>
+            <div class="filters" role="group" aria-label="Filtrar obras">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="predial">Predial</button>
+                <button class="filter-btn" data-filter="comercial">Comercial</button>
+                <button class="filter-btn" data-filter="industrial">Industrial</button>
+                <button class="filter-btn" data-filter="saude">Estabelecimentos de Saúde</button>
+                <button class="filter-btn" data-filter="instituicoes">Instituições</button>
+                <button class="filter-btn" data-filter="geral">Geral</button>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="predial comercial" 
-                     onclick="openModal('Heron Marinho', 'Campina Grande - PB', 'Complexo Residencial e Comercial', ['Subestações Abrigadas (13.8kV)', 'Geração de Emergência', 'Projeto de SPDA', 'Medição em Média Tensão'], 'fotos/obras/heron.jpg')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/heron.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-orange">
-                        <h3 class="font-bold text-navy text-lg">Heron Marinho</h3>
-                        <p class="text-sm text-gray-500 mt-1">Predial / Comercial</p>
-                    </div>
-                </div>
+            <div class="projects stagger" id="projects">
+                <button class="project-card" data-category="predial comercial"
+                    data-title="Heron Marinho" data-loc="Campina Grande - PB" data-desc="Complexo Residencial e Comercial"
+                    data-items="Subestações Abrigadas (13.8kV)|Geração de Emergência|Projeto de SPDA|Medição em Média Tensão" data-img="fotos/obras/heron.jpg">
+                    <div class="ph"><img src="fotos/obras/heron.jpg" alt="Obra Heron Marinho" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Heron Marinho</h3><p class="cat">Predial / Comercial</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="industrial"
-                     onclick="openModal('CD Alpargatas', 'Campina Grande - PB', 'Centro de Distribuição', ['Subestação Abrigada', 'Parametrização de Relé', 'SPDA', 'Projeto Elétrico de Baixa Tensão'], 'fotos/obras/alpargatas.jpg')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/alpargatas.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-navy">
-                        <h3 class="font-bold text-navy text-lg">Alpargatas Mixing Center</h3>
-                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="industrial"
+                    data-title="CD Alpargatas" data-loc="Campina Grande - PB" data-desc="Centro de Distribuição"
+                    data-items="Subestação Abrigada|Parametrização de Relé|SPDA|Projeto Elétrico de Baixa Tensão" data-img="fotos/obras/alpargatas.jpg">
+                    <div class="ph"><img src="fotos/obras/alpargatas.jpg" alt="Obra Alpargatas Mixing Center" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Alpargatas Mixing Center</h3><p class="cat">Comercial</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="comercial"
-                     onclick="openModal('Altas Horas Outlet', 'Santa Cruz do Capibaribe - PE', 'Centro Comercial', ['Subestação Abrigada', 'Projeto de SPDA', 'Rede de Distribuição em Média Tensão', 'Projeto Elétrico de Baixa Tensão'], 'fotos/obras/altas-horas.webp')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/altas-horas.webp" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-orange">
-                        <h3 class="font-bold text-navy text-lg">Altas Horas Outlet</h3>
-                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="comercial"
+                    data-title="Altas Horas Outlet" data-loc="Santa Cruz do Capibaribe - PE" data-desc="Centro Comercial"
+                    data-items="Subestação Abrigada|Projeto de SPDA|Rede de Distribuição em Média Tensão|Projeto Elétrico de Baixa Tensão" data-img="fotos/obras/altas-horas.webp">
+                    <div class="ph"><img src="fotos/obras/altas-horas.webp" alt="Obra Altas Horas Outlet" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Altas Horas Outlet</h3><p class="cat">Comercial</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="saude"
-                     onclick="openModal('Clínica Dr. Wanderley', 'Guarabira - PB', 'Clínica de Diagnósticos', ['Projeto Elétrico de Baixa Tensão', 'Subestação Aérea', 'Projeto de SPDA'], 'fotos/obras/wanderley.jpg')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/wanderley.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-navy">
-                        <h3 class="font-bold text-navy text-lg">Clínica Dr. Wanderley</h3>
-                        <p class="text-sm text-gray-500 mt-1">Estabelecimento de Saúde</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="saude"
+                    data-title="Clínica Dr. Wanderley" data-loc="Guarabira - PB" data-desc="Clínica de Diagnósticos"
+                    data-items="Projeto Elétrico de Baixa Tensão|Subestação Aérea|Projeto de SPDA" data-img="fotos/obras/wanderley.jpg">
+                    <div class="ph"><img src="fotos/obras/wanderley.jpg" alt="Obra Clínica Dr. Wanderley" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Clínica Dr. Wanderley</h3><p class="cat">Estabelecimento de Saúde</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="predial"
-                     onclick="openModal('Mandriani Home & Business', 'Campina Grande - PB', 'Edifício Residencial', ['Projeto Elétrico Baixa Tensão', 'Cabeamento Estruturado', 'Subestação Abrigada'], 'fotos/obras/mandriani.png')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/mandriani.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-orange">
-                        <h3 class="font-bold text-navy text-lg">Mandriani Home</h3>
-                        <p class="text-sm text-gray-500 mt-1">Predial</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="predial"
+                    data-title="Mandriani Home &amp; Business" data-loc="Campina Grande - PB" data-desc="Edifício Residencial"
+                    data-items="Projeto Elétrico Baixa Tensão|Cabeamento Estruturado|Subestação Abrigada" data-img="fotos/obras/mandriani.png">
+                    <div class="ph"><img src="fotos/obras/mandriani.png" alt="Obra Mandriani Home" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Mandriani Home</h3><p class="cat">Predial</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="industrial"
-                     onclick="openModal('Gerdau Aço Norte', 'Recife - PE', 'Siderúrgica', ['Elaboração de estudos para o Sistema de Proteção Contra Descargas Atmosféricas (SPDA) de toda planta da Industria'], 'fotos/obras/gerdau.png')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/gerdau.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-navy">
-                        <h3 class="font-bold text-navy text-lg">Gerdau Aço Norte</h3>
-                        <p class="text-sm text-gray-500 mt-1">Industrial</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="industrial"
+                    data-title="Gerdau Aço Norte" data-loc="Recife - PE" data-desc="Siderúrgica"
+                    data-items="Elaboração de estudos para o Sistema de Proteção Contra Descargas Atmosféricas (SPDA) de toda planta da Industria" data-img="fotos/obras/gerdau.png">
+                    <div class="ph"><img src="fotos/obras/gerdau.png" alt="Obra Gerdau Aço Norte" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Gerdau Aço Norte</h3><p class="cat">Industrial</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="instituicoes"
-                     onclick="openModal('Central de Aulas UEPB', 'Campina Grande - PB', 'Universidade', ['Projeto Elétrico de Baixa Tensão', 'Projeto Entrada de Energia', 'Subestação Aérea', 'SPDA'], 'fotos/obras/uepb.jpg')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/uepb.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-orange">
-                        <h3 class="font-bold text-navy text-lg">Central de Aulas UEPB</h3>
-                        <p class="text-sm text-gray-500 mt-1">Instituições</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="instituicoes"
+                    data-title="Central de Aulas UEPB" data-loc="Campina Grande - PB" data-desc="Universidade"
+                    data-items="Projeto Elétrico de Baixa Tensão|Projeto Entrada de Energia|Subestação Aérea|SPDA" data-img="fotos/obras/uepb.jpg">
+                    <div class="ph"><img src="fotos/obras/uepb.jpg" alt="Obra Central de Aulas UEPB" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Central de Aulas UEPB</h3><p class="cat">Instituições</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="instituicoes"
-                     onclick="openModal('CTERSA - INSA', 'Campina Grande - PB', 'Instituto de Pesquisa', ['Projeto de Arquitetura', 'Projetos Complementares de Engenharia', 'Orçamento de Obra'], 'fotos/obras/insa-1.jpg')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/insa-2.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-navy">
-                        <h3 class="font-bold text-navy text-lg">CTERSA - INSA</h3>
-                        <p class="text-sm text-gray-500 mt-1">Instituições</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="instituicoes"
+                    data-title="CTERSA - INSA" data-loc="Campina Grande - PB" data-desc="Instituto de Pesquisa"
+                    data-items="Projeto de Arquitetura|Projetos Complementares de Engenharia|Orçamento de Obra" data-img="fotos/obras/insa-1.jpg">
+                    <div class="ph"><img src="fotos/obras/insa-2.jpg" alt="Obra CTERSA - INSA" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>CTERSA - INSA</h3><p class="cat">Instituições</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="comercial"
-                     onclick="openModal('Rede Compras Loja II', 'Campina Grande - PB', 'Supermercado', ['Projeto Elétrico de Baixa Tensão da Reforma'], 'fotos/obras/redecompras.png')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/redecompras.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-orange">
-                        <h3 class="font-bold text-navy text-lg">Rede Compras</h3>
-                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="comercial"
+                    data-title="Rede Compras Loja II" data-loc="Campina Grande - PB" data-desc="Supermercado"
+                    data-items="Projeto Elétrico de Baixa Tensão da Reforma" data-img="fotos/obras/redecompras.png">
+                    <div class="ph"><img src="fotos/obras/redecompras.png" alt="Obra Rede Compras" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Rede Compras</h3><p class="cat">Comercial</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="industrial"
-                     onclick="openModal('Vão Livre - Estruturas', 'Queimadas - PB', 'Indústria Metalúrgica', ['Projeto Elétrico Baixa Tensão', 'Subestação 1000KVA', 'SPDA'], 'fotos/obras/vao-livre.png')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/vao-livre.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-navy">
-                        <h3 class="font-bold text-navy text-lg">Vão Livre</h3>
-                        <p class="text-sm text-gray-500 mt-1">Industrial</p>
-                    </div>
-                </div>
+                <button class="project-card" data-category="industrial"
+                    data-title="Vão Livre - Estruturas" data-loc="Queimadas - PB" data-desc="Indústria Metalúrgica"
+                    data-items="Projeto Elétrico Baixa Tensão|Subestação 1000KVA|SPDA" data-img="fotos/obras/vao-livre.png">
+                    <div class="ph"><img src="fotos/obras/vao-livre.png" alt="Obra Vão Livre" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Vão Livre</h3><p class="cat">Industrial</p></div></div>
+                </button>
 
-                <div class="project-card group cursor-pointer rounded-xl overflow-hidden shadow-lg" data-category="comercial"
-                     onclick="openModal('Bomquesó - Liberdade', 'Campina Grande - PB', 'Atacado e Varejo', ['Projeto Elétrico Baixa Tensão', 'Entrada de Energia', 'Subestação Aérea'], 'fotos/obras/bomqueso.png')">
-                    <div class="h-56 md:h-64 overflow-hidden relative">
-                        <img src="fotos/obras/bomqueso.png" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-navy/80 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold uppercase text-sm">Ver Detalhes</div>
-                    </div>
-                    <div class="p-6 bg-white border-b-4 border-orange">
-                        <h3 class="font-bold text-navy text-lg">Bomquesó</h3>
-                        <p class="text-sm text-gray-500 mt-1">Comercial</p>
-                    </div>
-                </div>
-
+                <button class="project-card" data-category="comercial"
+                    data-title="Bomquesó - Liberdade" data-loc="Campina Grande - PB" data-desc="Atacado e Varejo"
+                    data-items="Projeto Elétrico Baixa Tensão|Entrada de Energia|Subestação Aérea" data-img="fotos/obras/bomqueso.png">
+                    <div class="ph"><img src="fotos/obras/bomqueso.png" alt="Obra Bomquesó" loading="lazy"><span class="more">Ver detalhes <i data-lucide="arrow-up-right" class="icon"></i></span></div>
+                    <div class="meta"><div><h3>Bomquesó</h3><p class="cat">Comercial</p></div></div>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO DE CLIENTES / PARCEIROS -->
-    <section class="py-16 bg-white border-t border-gray-100 reveal">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-10">
-                <p class="text-gray-500 text-sm font-bold uppercase tracking-widest">Quem confia na Amadeu Projetos</p>
+    <!-- CLIENTES -->
+    <section class="clients" aria-label="Clientes">
+        <p class="title">Quem confia na Amadeu Projetos</p>
+        <div class="marquee">
+            <div class="marquee-track">
+                <div class="marquee-set">
+                    <img src="fotos/clientes/site/alpargatas.png" alt="Alpargatas" style="height:64px" loading="lazy">
+                    <img src="fotos/clientes/site/cagepa.png" alt="Cagepa" style="height:51px" loading="lazy">
+                    <img src="fotos/clientes/site/sicredi.png" alt="Sicredi" style="height:61px" loading="lazy">
+                    <img src="fotos/clientes/site/facisa.png" alt="Unifacisa" style="height:43px" loading="lazy">
+                    <img src="fotos/clientes/site/yazigi.png" alt="Yázigi" style="height:53px" loading="lazy">
+                    <img src="fotos/clientes/site/rede-compras.png" alt="Rede Compras" style="height:52px" loading="lazy">
+                    <img src="fotos/clientes/site/vitamassa.png" alt="Vitamassa" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/tintas-lux.png" alt="Tintas Lux" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/clinica-wanderley.png" alt="Clínica Dr. Wanderley" style="height:34px" loading="lazy">
+                    <img src="fotos/clientes/site/andrade-marinho.png" alt="Andrade Marinho LMF" style="height:47px" loading="lazy">
+                    <img src="fotos/clientes/site/ourovel.png" alt="Ourovel" style="height:72px" loading="lazy">
+                    <img src="fotos/clientes/site/motiva.png" alt="Motiva" style="height:50px" loading="lazy">
+                    <img src="fotos/clientes/site/via.png" alt="Via Engenharia" style="height:55px" loading="lazy">
+                    <img src="fotos/clientes/site/imago.png" alt="Imago Diagnóstico por Imagem" style="height:44px" loading="lazy">
+                    <img src="fotos/clientes/site/dijuan.png" alt="Dijuan Construtora" style="height:72px" loading="lazy">
+                </div>
+                <div class="marquee-set" aria-hidden="true">
+                    <img src="fotos/clientes/site/alpargatas.png" alt="" style="height:64px" loading="lazy">
+                    <img src="fotos/clientes/site/cagepa.png" alt="" style="height:51px" loading="lazy">
+                    <img src="fotos/clientes/site/sicredi.png" alt="" style="height:61px" loading="lazy">
+                    <img src="fotos/clientes/site/facisa.png" alt="" style="height:43px" loading="lazy">
+                    <img src="fotos/clientes/site/yazigi.png" alt="" style="height:53px" loading="lazy">
+                    <img src="fotos/clientes/site/rede-compras.png" alt="" style="height:52px" loading="lazy">
+                    <img src="fotos/clientes/site/vitamassa.png" alt="" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/tintas-lux.png" alt="" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/clinica-wanderley.png" alt="" style="height:34px" loading="lazy">
+                    <img src="fotos/clientes/site/andrade-marinho.png" alt="" style="height:47px" loading="lazy">
+                    <img src="fotos/clientes/site/ourovel.png" alt="" style="height:72px" loading="lazy">
+                    <img src="fotos/clientes/site/motiva.png" alt="" style="height:50px" loading="lazy">
+                    <img src="fotos/clientes/site/via.png" alt="" style="height:55px" loading="lazy">
+                    <img src="fotos/clientes/site/imago.png" alt="" style="height:44px" loading="lazy">
+                    <img src="fotos/clientes/site/dijuan.png" alt="" style="height:72px" loading="lazy">
+                </div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
-                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <img src="fotos/clientes/alpargatas.jpg" alt="Alpargatas" class="h-20 object-contain">
-                </div>
-                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <img src="fotos/clientes/facisa.png" alt="Unifacisa" class="h-10 object-contain">
-                </div>
-                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <img src="fotos/clientes/ourovel.jpg" alt="Ourovel" class="h-20 object-contain">
-                </div>
-                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <img src="fotos/clientes/lmf.png" alt="LMF" class="h-20 object-contain">
-                </div>
-                <div class="flex justify-center hover:scale-110 transition duration-300 cursor-pointer">
-                    <img src="fotos/clientes/Motiva.png" alt="Motiva" class="h-12 object-contain">
-                </div>
-            </div>
-        </div>
-    </section>
-	
-	  <!-- FAIXA DE CHAMADA FINAL (NOVA) -->
-    <section class="py-16 bg-orange relative overflow-hidden reveal">
-        <div class="absolute top-0 left-0 w-full h-full bg-white/10 skew-y-3 origin-bottom-left transform scale-110"></div>
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 font-heading">Pronto para iniciar seu projeto?</h2>
-            <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Garanta segurança normativa e eficiência energética com a Amadeu Projetos.</p>
-            <a href="https://wa.me/5583999695125" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-orange font-bold rounded-full hover:bg-navy hover:text-white transition shadow-2xl transform hover:scale-105 duration-200">
-                <i data-lucide="message-circle" class="w-5 h-5"></i> Falar no WhatsApp Agora
-            </a>
         </div>
     </section>
 
-    <!-- FORMULÁRIO DE CONTATO (NOVO) -->
-    <section id="contato" class="py-20 bg-navy relative overflow-hidden reveal">
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-orange/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col lg:flex-row gap-16">
-                <!-- Lado Esquerdo -->
-                <div class="lg:w-5/12 text-white">
-                    <span class="text-orange font-bold uppercase tracking-widest text-sm mb-2 block">Fale com a Engenharia</span>
-                    <h2 class="text-4xl font-extrabold font-heading mb-6 leading-tight">Vamos tirar o seu projeto do papel?</h2>
-                    <p class="text-gray-300 text-lg mb-10 leading-relaxed">Solicite uma proposta técnica ou agende uma reunião. Retornamos em até 24h.</p>
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4"><div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-orange"><i data-lucide="phone" class="w-6 h-6"></i></div><div><p class="text-xs text-gray-400 uppercase font-bold">Ligue para nós</p><p class="text-xl font-bold">(83) 9 9969.5125 <span class="text-sm font-normal text-gray-400">/</span> 3341-6017</p></div></div>
-                        <div class="flex items-center gap-4"><div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-orange"><i data-lucide="mail" class="w-6 h-6"></i></div><div><p class="text-xs text-gray-400 uppercase font-bold">Envie um e-mail</p><p class="text-lg font-bold">contato@amadeuprojetos.com.br</p></div></div>
+    <!-- CHAMADA FINAL -->
+    <section class="cta">
+        <div class="wrap reveal">
+            <div>
+                <h2>Pronto para iniciar seu projeto?</h2>
+                <p>Garanta segurança normativa e eficiência energética com a Amadeu Projetos.</p>
+            </div>
+            <a href="https://wa.me/5583999695125" target="_blank" rel="noopener" class="btn magnetic"><i data-lucide="message-circle" class="icon"></i> Falar no WhatsApp Agora</a>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="contact">
+        <div class="wrap contact-grid">
+            <div class="reveal">
+                <span class="kicker">Fale com a engenharia</span>
+                <h2>Vamos tirar o seu projeto do papel?</h2>
+                <p class="lead">Solicite uma proposta técnica ou agende uma reunião. Retornamos em até 24h.</p>
+                <div class="c-item"><span class="ci"><i data-lucide="phone" class="icon"></i></span><div><small>Ligue para nós</small><b>(83) 9 9969.5125 / 3341-6017</b></div></div>
+                <div class="c-item"><span class="ci"><i data-lucide="mail" class="icon"></i></span><div><small>Envie um e-mail</small><b>contato@amadeuprojetos.com.br</b></div></div>
+            </div>
+            <div class="form-card reveal">
+                <form action="https://formspree.io/f/xangdylw" method="POST">
+                    <div class="form-row">
+                        <div class="field"><label for="f-nome">Nome</label><input id="f-nome" type="text" name="nome" placeholder="Seu nome" required></div>
+                        <div class="field"><label for="f-tel">Telefone</label><input id="f-tel" type="tel" name="telefone" placeholder="(83) 99999-9999" required></div>
                     </div>
-                </div>
-                <!-- Lado Direito (Formulário) -->
-                <div class="lg:w-7/12">
-                    <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-10">
-                        <!-- Substitua o action abaixo pelo seu link do Formspree -->
-                        <form action="https://formspree.io/f/xangdylw" method="POST" class="space-y-6">
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div><label class="block text-sm font-bold text-gray-700 mb-2">Nome</label><input type="text" name="nome" placeholder="Seu nome" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></div>
-                                <div><label class="block text-sm font-bold text-gray-700 mb-2">Telefone</label><input type="tel" name="telefone" placeholder="(83) 99999-9999" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></div>
-                            </div>
-                            <div><label class="block text-sm font-bold text-gray-700 mb-2">E-mail</label><input type="email" name="email" placeholder="seu@email.com" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></div>
-                            <div><label class="block text-sm font-bold text-gray-700 mb-2">Mensagem</label><textarea name="mensagem" rows="3" placeholder="Como podemos ajudar?" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange focus:outline-none"></textarea></div>
-                            <button type="submit" class="w-full py-4 bg-orange text-white font-bold rounded-lg shadow-lg hover:bg-navy transition transform hover:-translate-y-1">ENVIAR MENSAGEM</button>
-                        </form>
-                    </div>
-                </div>
+                    <div class="field"><label for="f-email">E-mail</label><input id="f-email" type="email" name="email" placeholder="seu@email.com" required></div>
+                    <div class="field"><label for="f-msg">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" placeholder="Como podemos ajudar?" required></textarea></div>
+                    <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- MAPA -->
-    <section id="mapa" class="w-full h-96 bg-gray-200 relative z-10">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.989862387488!2d-35.8852397!3d-7.2213494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac1e30393570a3%3A0x500e573732573207!2sRua%20Dom%20Pedro%20II%2C%20900%20-%20Prata%2C%20Campina%20Grande%20-%20PB%2C%2058400-560!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section class="map">
+        <iframe title="Mapa: Rua Dom Pedro II, 900 - Prata, Campina Grande - PB" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.989862387488!2d-35.8852397!3d-7.2213494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac1e30393570a3%3A0x500e573732573207!2sRua%20Dom%20Pedro%20II%2C%20900%20-%20Prata%2C%20Campina%20Grande%20-%20PB%2C%2058400-560!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-navy text-white pt-16 pb-8 border-t-4 border-orange">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12 mb-12">
-                <!-- COLUNA 1 -->
-                <div class="text-center md:text-left">
-                    <h2 class="text-2xl font-bold mb-4 font-heading tracking-wide">AMADEU PROJETOS</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Soluções práticas e inovadoras para a realização do seu projeto. Engenharia com segurança e qualidade desde 1996.
-                    </p>
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="wrap">
+            <div class="foot-grid">
+                <div>
+                    <h2>AMADEU PROJETOS</h2>
+                    <p>Soluções práticas e inovadoras para a realização do seu projeto. Engenharia com segurança e qualidade desde 1996.</p>
                 </div>
-                <!-- COLUNA 2 -->
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-lg font-bold text-orange mb-6 uppercase tracking-wider">Fale Conosco</h3>
-                    <div class="space-y-4">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Dom+Pedro+II,+900+-+Prata,+Campina+Grande+-+PB" target="_blank" class="flex items-start gap-3 text-gray-300 hover:text-white transition group text-left">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
-                            <span class="text-sm leading-tight">Rua Dom Pedro II, 900 - Prata<br>Campina Grande - PB</span>
-                        </a>
-                        <a href="https://wa.me/5583999695125" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="phone" class="w-4 h-4"></i></div>
-                            <span>(83) 9 9969.5125 / 3341-6017</span>
-                        </a>
-			</a>
-                        <a href="mailto:contato@amadeuprojetos.com.br" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="mail" class="w-4 h-4"></i></div>
-                            <span>contato@amadeuprojetos.com.br</span>
-                        </a>
-                        <a href="https://instagram.com/amadeuprojetos" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition group">
-                            <div class="bg-white/10 p-2 rounded-full group-hover:bg-orange transition shrink-0"><i data-lucide="instagram" class="w-4 h-4"></i></div>
-                            <span>@amadeuprojetos</span>
-                        </a>
-                    </div>
+                <div>
+                    <h3>Fale Conosco</h3>
+                    <a class="f-link" href="https://www.google.com/maps/search/?api=1&query=Rua+Dom+Pedro+II,+900+-+Prata,+Campina+Grande+-+PB" target="_blank" rel="noopener"><span class="fi"><i data-lucide="map-pin"></i></span><span>Rua Dom Pedro II, 900 - Prata<br>Campina Grande - PB</span></a>
+                    <a class="f-link" href="https://wa.me/5583999695125" target="_blank" rel="noopener"><span class="fi"><i data-lucide="phone"></i></span><span>(83) 9 9969.5125 / 3341-6017</span></a>
+                    <a class="f-link" href="mailto:contato@amadeuprojetos.com.br"><span class="fi"><i data-lucide="mail"></i></span><span>contato@amadeuprojetos.com.br</span></a>
+                    <a class="f-link" href="https://instagram.com/amadeuprojetos" target="_blank" rel="noopener"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span><span>@amadeuprojetos</span></a>
                 </div>
-                <!-- COLUNA 3 -->
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-lg font-bold text-orange mb-6 uppercase tracking-wider">Menu</h3>
-                    <ul class="space-y-3 text-gray-300">
-                        <li><a href="#home" class="hover:text-white hover:translate-x-1 transition inline-block">Início</a></li>
-                        <li><a href="#sobre" class="hover:text-white hover:translate-x-1 transition inline-block">A Empresa</a></li>
-                        <li><a href="#servicos" class="hover:text-white hover:translate-x-1 transition inline-block">Serviços</a></li>
-                        <li><a href="#portfolio" class="hover:text-white hover:translate-x-1 transition inline-block">Portfólio</a></li>
+                <div>
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">A Empresa</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-8 text-center">
-                <p class="text-xs text-gray-500">
-                    &copy; 2025 Amadeu Projetos e Construções Ltda. Todos os direitos reservados.
-                </p>
-            </div>
+            <p class="copy">&copy; 2026 Amadeu Projetos e Construções Ltda. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <!-- MODAL -->
-    <div id="project-modal" class="fixed inset-0 z-[9999] hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onclick="closeModal()">
-        <div class="bg-white w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row relative animate-fadeIn" onclick="event.stopPropagation()">
-            <div class="md:w-1/2 h-64 md:h-auto bg-gray-200">
-                <img id="modal-img" src="" alt="Detalhe" class="w-full h-full object-cover">
-            </div>
-            <div class="md:w-1/2 p-8 relative flex flex-col justify-center">
-                <button onclick="closeModal()" class="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-orange hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
-                <span class="text-xs font-bold text-orange uppercase tracking-wider mb-2">Detalhes do Projeto</span>
-                <h3 id="modal-title" class="text-2xl font-bold text-navy mb-2"></h3>
-                <p id="modal-location" class="text-sm text-gray-500 mb-4 flex items-center gap-2"><i data-lucide="map-pin" class="w-4"></i> <span id="modal-loc-text"></span></p>
-                <p id="modal-desc" class="text-gray-700 mb-6 text-sm italic border-l-2 border-orange pl-3"></p>
-                <div class="flex-grow overflow-y-auto max-h-40 md:max-h-none mb-6">
-                    <h4 class="font-bold text-navy text-xs uppercase mb-3">Escopo Realizado:</h4>
-                    <ul id="modal-list" class="text-sm text-gray-600 space-y-2"></ul>
-                </div>
-                <a href="https://wa.me/5583999695125" target="_blank" class="block w-full py-3 bg-green-500 text-white font-bold text-center rounded hover:bg-green-600 transition shadow-lg">Solicitar Orçamento Similar</a>
+    <div class="modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+            <div class="modal-img"><img id="modal-img" src="" alt=""></div>
+            <div class="modal-body">
+                <button class="modal-close" id="modal-close" aria-label="Fechar"><i data-lucide="x" class="icon"></i></button>
+                <span class="k">Detalhes do projeto</span>
+                <h3 id="modal-title"></h3>
+                <p class="modal-loc"><i data-lucide="map-pin"></i> <span id="modal-loc-text"></span></p>
+                <p class="modal-desc" id="modal-desc"></p>
+                <h4>Escopo realizado</h4>
+                <ul class="modal-list" id="modal-list"></ul>
+                <a href="https://wa.me/5583999695125" target="_blank" rel="noopener" class="btn btn-whats">Solicitar Orçamento Similar</a>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPTS -->
     <script>
-        // Ícones
-        lucide.createIcons();
+        const icons = () => { if (window.lucide) lucide.createIcons(); };
+        icons();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Modal
-        function openModal(title, location, desc, items, imgSrc) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-loc-text').innerText = location;
-            document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('modal-img').src = imgSrc;
+        /* ---------- Nav: encolhe ao rolar, progresso, link ativo ---------- */
+        const nav = document.getElementById('nav');
+        const progress = document.getElementById('progress');
+        const supportsTimeline = CSS.supports('animation-timeline: scroll()');
+        const onScroll = () => {
+            nav.classList.toggle('scrolled', window.scrollY > 30);
+            if (!supportsTimeline) {
+                const h = document.documentElement.scrollHeight - innerHeight;
+                progress.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+            }
+        };
+        addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        const links = document.querySelectorAll('.nav-links a.link');
+        const spy = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        ['home', 'sobre', 'servicos', 'portfolio'].forEach(id => spy.observe(document.getElementById(id)));
+
+        /* ---------- Diagrama pausa fora da tela ---------- */
+        const hero = document.getElementById('home');
+        new IntersectionObserver(([e]) => hero.classList.toggle('off', !e.isIntersecting)).observe(hero);
+
+        /* ---------- Menu mobile ---------- */
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            const open = menu.classList.toggle('open');
+            menuBtn.setAttribute('aria-expanded', open);
+        });
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
+
+        /* ---------- Revelação ao rolar ---------- */
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            if (el.classList.contains('stagger')) {
+                [...el.children].forEach((c, i) => c.style.transitionDelay = (i * 60) + 'ms');
+            }
+            el.classList.add('in');
+            io.unobserve(el);
+        }), { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.reveal, .stagger, #about-figure').forEach(el => io.observe(el));
+
+        /* ---------- Contadores ---------- */
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(c => c.textContent = reduce ? c.dataset.target : '0');
+        const cio = new IntersectionObserver(es => es.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target, target = +el.dataset.target, dur = 1800, t0 = performance.now();
+            const tick = now => {
+                const p = Math.min((now - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 4);
+                el.textContent = Math.round(target * eased);
+                if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+            cio.unobserve(el);
+        }), { threshold: 0.6 });
+        if (!reduce) counters.forEach(c => cio.observe(c));
+
+        /* ---------- Botões magnéticos (só mouse) ---------- */
+        if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            document.querySelectorAll('.magnetic').forEach(b => {
+                b.addEventListener('mousemove', e => {
+                    const r = b.getBoundingClientRect();
+                    const x = (e.clientX - r.left - r.width / 2) * 0.18, y = (e.clientY - r.top - r.height / 2) * 0.3;
+                    b.style.transform = `translate(${x}px, ${y}px)`;
+                });
+                b.addEventListener('mouseleave', () => b.style.transform = '');
+            });
+        }
+
+        /* ---------- Filtro do portfólio ---------- */
+        const cards = document.querySelectorAll('.project-card');
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+            const cat = btn.dataset.filter;
+            const apply = () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+                let i = 0;
+                cards.forEach(card => {
+                    const show = cat === 'all' || card.dataset.category.includes(cat);
+                    card.classList.toggle('hide', !show);
+                    card.classList.remove('pop');
+                    if (show && !document.startViewTransition && !reduce) {
+                        void card.offsetWidth;
+                        card.style.animationDelay = (i++ * 50) + 'ms';
+                        card.classList.add('pop');
+                    }
+                });
+            };
+            if (document.startViewTransition && !reduce) document.startViewTransition(apply); else apply();
+        }));
+
+        /* ---------- Modal ---------- */
+        const modal = document.getElementById('project-modal');
+        let lastFocus = null;
+        function openModal(card) {
+            lastFocus = card;
+            document.getElementById('modal-title').textContent = card.dataset.title;
+            document.getElementById('modal-loc-text').textContent = card.dataset.loc;
+            document.getElementById('modal-desc').textContent = card.dataset.desc;
+            const img = document.getElementById('modal-img');
+            img.src = card.dataset.img; img.alt = card.dataset.title;
             const list = document.getElementById('modal-list');
             list.innerHTML = '';
-            items.forEach(i => {
-                list.innerHTML += `<li class="flex gap-2 items-start"><i data-lucide="check-circle-2" class="w-4 h-4 text-orange mt-1 shrink-0"></i> <span>${i}</span></li>`;
+            card.dataset.items.split('|').forEach((t, i) => {
+                const li = document.createElement('li');
+                li.style.animationDelay = (180 + i * 70) + 'ms';
+                li.innerHTML = '<i data-lucide="check-circle-2"></i>';
+                const s = document.createElement('span'); s.textContent = t; li.appendChild(s);
+                list.appendChild(li);
             });
-            lucide.createIcons();
-            document.getElementById('project-modal').classList.remove('hidden');
+            icons();
+            modal.classList.add('open');
             document.body.classList.add('modal-open');
+            document.getElementById('modal-close').focus();
         }
-
         function closeModal() {
-            document.getElementById('project-modal').classList.add('hidden');
+            modal.classList.remove('open');
             document.body.classList.remove('modal-open');
+            if (lastFocus) lastFocus.focus();
         }
-
-        // Filtros
-        function filterProjects(category) {
-            const projects = document.querySelectorAll('.project-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-navy', 'text-white', 'border-navy');
-                btn.classList.add('text-gray-600', 'border-gray-200');
-            });
-            event.target.classList.remove('text-gray-600', 'border-gray-200');
-            event.target.classList.add('bg-navy', 'text-white', 'border-navy');
-            projects.forEach(project => {
-                const categories = project.getAttribute('data-category');
-                if (category === 'all' || categories.includes(category)) {
-                    project.style.display = 'block';
-                } else {
-                    project.style.display = 'none';
-                }
-            });
-        }
-
-        // Scroll Reveal
-        function reveal() {
-          var reveals = document.querySelectorAll(".reveal");
-          for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 100;
-            if (elementTop < windowHeight - elementVisible) {
-              reveals[i].classList.add("active");
-            }
-          }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); 
-
-        // Contadores
-        const counters = document.querySelectorAll('.counter');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = +counter.getAttribute('data-target');
-                    const speed = 200; 
-                    const updateCount = () => {
-                        const count = +counter.innerText;
-                        const inc = target / speed;
-                        if (count < target) {
-                            counter.innerText = Math.ceil(count + inc);
-                            setTimeout(updateCount, 15);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCount();
-                    observer.unobserve(counter);
-                }
-            });
-        }, { threshold: 0.5 });
-        counters.forEach(counter => observer.observe(counter));
+        cards.forEach(c => c.addEventListener('click', () => openModal(c)));
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
     </script>
 </body>
 </html>
-
-
-
