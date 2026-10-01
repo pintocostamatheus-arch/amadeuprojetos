@@ -12,6 +12,7 @@
     <meta property="og:image" content="fotos/logo.png">
 
     <link rel="icon" href="fotos/favicon.ico" sizes="any">
+    <link rel="icon" href="fotos/favicon.svg" type="image/svg+xml">
     <link rel="icon" type="image/png" sizes="32x32" href="fotos/favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="fotos/favicon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="fotos/apple-touch-icon.png">
@@ -419,7 +420,10 @@
             mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
             -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
         }
-        .marquee-track { display: flex; width: max-content; animation: marquee 55s linear infinite; }
+        .marquees { display: grid; gap: 26px; }
+        .marquee-track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
+        .marquee.rev .marquee-track { animation-direction: reverse; animation-duration: 38s; }
+        .marquees:hover .marquee-track { animation-play-state: paused; }
         .marquee:hover .marquee-track { animation-play-state: paused; }
         .marquee-set { display: flex; align-items: center; gap: 72px; padding-right: 72px; }
         .marquee img { width: auto; max-width: none; object-fit: contain; transition: transform .35s var(--ease); }
@@ -931,43 +935,69 @@
     <!-- CLIENTES -->
     <section class="clients" aria-label="Clientes">
         <p class="title">Quem confia na Amadeu Projetos</p>
+<div class="marquees">
         <div class="marquee">
             <div class="marquee-track">
                 <div class="marquee-set">
                     <img src="fotos/clientes/site/alpargatas.png" alt="Alpargatas" style="height:64px" loading="lazy">
                     <img src="fotos/clientes/site/cagepa.png" alt="Cagepa" style="height:51px" loading="lazy">
+                    <img src="fotos/clientes/site/jar.png" alt="JAR Construções" style="height:52px" loading="lazy">
                     <img src="fotos/clientes/site/sicredi.png" alt="Sicredi" style="height:61px" loading="lazy">
                     <img src="fotos/clientes/site/facisa.png" alt="Unifacisa" style="height:43px" loading="lazy">
+                    <img src="fotos/clientes/site/cipresa.png" alt="Cipresa" style="height:54px" loading="lazy">
                     <img src="fotos/clientes/site/yazigi.png" alt="Yázigi" style="height:53px" loading="lazy">
-                    <img src="fotos/clientes/site/rede-compras.png" alt="Rede Compras" style="height:52px" loading="lazy">
-                    <img src="fotos/clientes/site/vitamassa.png" alt="Vitamassa" style="height:60px" loading="lazy">
-                    <img src="fotos/clientes/site/tintas-lux.png" alt="Tintas Lux" style="height:60px" loading="lazy">
-                    <img src="fotos/clientes/site/clinica-wanderley.png" alt="Clínica Dr. Wanderley" style="height:34px" loading="lazy">
-                    <img src="fotos/clientes/site/andrade-marinho.png" alt="Andrade Marinho LMF" style="height:47px" loading="lazy">
-                    <img src="fotos/clientes/site/ourovel.png" alt="Ourovel" style="height:72px" loading="lazy">
                     <img src="fotos/clientes/site/motiva.png" alt="Motiva" style="height:50px" loading="lazy">
+                    <img src="fotos/clientes/site/campimagem.png" alt="Campimagem" style="height:54px" loading="lazy">
+                    <img src="fotos/clientes/site/rede-compras.png" alt="Rede Compras" style="height:52px" loading="lazy">
                     <img src="fotos/clientes/site/via.png" alt="Via Engenharia" style="height:55px" loading="lazy">
-                    <img src="fotos/clientes/site/imago.png" alt="Imago Diagnóstico por Imagem" style="height:44px" loading="lazy">
-                    <img src="fotos/clientes/site/dijuan.png" alt="Dijuan Construtora" style="height:72px" loading="lazy">
+                    <img src="fotos/clientes/site/fuji.png" alt="Fuji Mármores e Granitos" style="height:48px" loading="lazy">
                 </div>
                 <div class="marquee-set" aria-hidden="true">
                     <img src="fotos/clientes/site/alpargatas.png" alt="" style="height:64px" loading="lazy">
                     <img src="fotos/clientes/site/cagepa.png" alt="" style="height:51px" loading="lazy">
+                    <img src="fotos/clientes/site/jar.png" alt="" style="height:52px" loading="lazy">
                     <img src="fotos/clientes/site/sicredi.png" alt="" style="height:61px" loading="lazy">
                     <img src="fotos/clientes/site/facisa.png" alt="" style="height:43px" loading="lazy">
+                    <img src="fotos/clientes/site/cipresa.png" alt="" style="height:54px" loading="lazy">
                     <img src="fotos/clientes/site/yazigi.png" alt="" style="height:53px" loading="lazy">
-                    <img src="fotos/clientes/site/rede-compras.png" alt="" style="height:52px" loading="lazy">
-                    <img src="fotos/clientes/site/vitamassa.png" alt="" style="height:60px" loading="lazy">
-                    <img src="fotos/clientes/site/tintas-lux.png" alt="" style="height:60px" loading="lazy">
-                    <img src="fotos/clientes/site/clinica-wanderley.png" alt="" style="height:34px" loading="lazy">
-                    <img src="fotos/clientes/site/andrade-marinho.png" alt="" style="height:47px" loading="lazy">
-                    <img src="fotos/clientes/site/ourovel.png" alt="" style="height:72px" loading="lazy">
                     <img src="fotos/clientes/site/motiva.png" alt="" style="height:50px" loading="lazy">
+                    <img src="fotos/clientes/site/campimagem.png" alt="" style="height:54px" loading="lazy">
+                    <img src="fotos/clientes/site/rede-compras.png" alt="" style="height:52px" loading="lazy">
                     <img src="fotos/clientes/site/via.png" alt="" style="height:55px" loading="lazy">
-                    <img src="fotos/clientes/site/imago.png" alt="" style="height:44px" loading="lazy">
-                    <img src="fotos/clientes/site/dijuan.png" alt="" style="height:72px" loading="lazy">
+                    <img src="fotos/clientes/site/fuji.png" alt="" style="height:48px" loading="lazy">
                 </div>
             </div>
+        </div>
+        <div class="marquee rev">
+            <div class="marquee-track">
+                <div class="marquee-set">
+                    <img src="fotos/clientes/site/imago.png" alt="Imago Diagnóstico por Imagem" style="height:44px" loading="lazy">
+                    <img src="fotos/clientes/site/dijuan.png" alt="Dijuan Construtora" style="height:72px" loading="lazy">
+                    <img src="fotos/clientes/site/paraiba-construcoes.png" alt="Paraíba Construções" style="height:44px" loading="lazy">
+                    <img src="fotos/clientes/site/vitamassa.png" alt="Vitamassa" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/tintas-lux.png" alt="Tintas Lux" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/clinica-santa-maria.png" alt="Clínica Santa Maria" style="height:48px" loading="lazy">
+                    <img src="fotos/clientes/site/clinica-wanderley.png" alt="Clínica Dr. Wanderley" style="height:34px" loading="lazy">
+                    <img src="fotos/clientes/site/link.png" alt="Link Engenharia" style="height:56px" loading="lazy">
+                    <img src="fotos/clientes/site/andrade-marinho.png" alt="Andrade Marinho LMF" style="height:47px" loading="lazy">
+                    <img src="fotos/clientes/site/macena.png" alt="Macena Material de Construção" style="height:54px" loading="lazy">
+                    <img src="fotos/clientes/site/ourovel.png" alt="Ourovel" style="height:72px" loading="lazy">
+                </div>
+                <div class="marquee-set" aria-hidden="true">
+                    <img src="fotos/clientes/site/imago.png" alt="" style="height:44px" loading="lazy">
+                    <img src="fotos/clientes/site/dijuan.png" alt="" style="height:72px" loading="lazy">
+                    <img src="fotos/clientes/site/paraiba-construcoes.png" alt="" style="height:44px" loading="lazy">
+                    <img src="fotos/clientes/site/vitamassa.png" alt="" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/tintas-lux.png" alt="" style="height:60px" loading="lazy">
+                    <img src="fotos/clientes/site/clinica-santa-maria.png" alt="" style="height:48px" loading="lazy">
+                    <img src="fotos/clientes/site/clinica-wanderley.png" alt="" style="height:34px" loading="lazy">
+                    <img src="fotos/clientes/site/link.png" alt="" style="height:56px" loading="lazy">
+                    <img src="fotos/clientes/site/andrade-marinho.png" alt="" style="height:47px" loading="lazy">
+                    <img src="fotos/clientes/site/macena.png" alt="" style="height:54px" loading="lazy">
+                    <img src="fotos/clientes/site/ourovel.png" alt="" style="height:72px" loading="lazy">
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
